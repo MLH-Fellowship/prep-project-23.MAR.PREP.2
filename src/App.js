@@ -8,19 +8,6 @@ function App() {
   const [city, setCity] = useState("New York City")
   const [results, setResults] = useState(null);
 
-  // Settings for News API
-  const [errorNews, setErrorNews] = useState(null);
-  const [isLoadedNews, setIsLoadedNews] = useState(false);
-  const [resultsNews, setResultsNews] = useState(null);
-
-  const today = new Date()
-  const yesterday = new Date(today)
-  yesterday.setDate(yesterday.getDate() - 1)
-
-  console.log(yesterday)
-  console.log(today)
-
-  // Fetching data From News API
   useEffect(() => {
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&appid=" + process.env.REACT_APP_APIKEY)
       .then(res => res.json())
@@ -36,28 +23,6 @@ function App() {
         (error) => {
           setIsLoaded(true);
           setError(error);
-        }
-      )
-  }, [city])
-
-  useEffect(() => {
-    fetch("https://newsapi.org/v2/everything?q=Weather%20in " + city + "&from=" +  + "&units=metric" + "&apiKey=" + process.env.REACT_APP_WEATHERNEWSKEY)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          if (result['cod'] !== 200) {
-            // setIsLoaded(false)
-            console.log(result)
-          } else {
-            // setIsLoaded(true);
-            // setResults(result);
-            console.log(result)
-          }
-        },
-        (error) => {
-          // setIsLoaded(true);
-          // setError(error);
-          console.log(error)
         }
       )
   }, [city])
