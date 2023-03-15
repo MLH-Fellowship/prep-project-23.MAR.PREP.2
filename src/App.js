@@ -6,10 +6,15 @@ function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState("New York City")
-  const [results, setResults] = useState(null);
+  const [results, setResults] = useState([]);
+  const [buttonClick, setButtonClick] = useState(false);
+
+  const APIKEY = process.env.REACT_APP_APIKEY;
+
+  console.log(APIKEY);
 
   useEffect(() => {
-    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&appid=" + process.env.REACT_APP_APIKEY)
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&appid=" + APIKEY)
       .then(res => res.json())
       .then(
         (result) => {
@@ -17,7 +22,7 @@ function App() {
             setIsLoaded(false)
           } else {
             setIsLoaded(true);
-            setResults(result);
+            setResults([...results, result]);
           }
         },
         (error) => {
@@ -25,7 +30,7 @@ function App() {
           setError(error);
         }
       )
-  }, [city])
+  }, [buttonClick])
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -36,15 +41,24 @@ function App() {
         <h2>Enter a city below 👇</h2>
         <input
           type="text"
+          name="cityinbox"
           value={city}
           onChange={event => setCity(event.target.value)} />
+        <button onClick={() => setButtonClick(!buttonClick)}>Search</button>
+        <button onClick={() => setResults([])}>Clear All</button>
         <div className="Results">
           {!isLoaded && <h2>Loading...</h2>}
           {console.log(results)}
           {isLoaded && results && <>
-            <h3>{results.weather[0].main}</h3>
-            <p>Feels like {results.main.feels_like}°C</p>
-            <i><p>{results.name}, {results.sys.country}</p></i>
+            {results.map((result) => {
+              return(
+              <div>
+                <h3>{result.weather[0].main}</h3>
+                <p>Feels like {result.main.feels_like}°C</p>
+                <i><p>{result.name}, {result.sys.country}</p></i>
+              </div>
+              );
+            })}
           </>}
         </div>
       </div>
