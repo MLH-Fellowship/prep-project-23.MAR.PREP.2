@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import '../NewsArticles.css';
+import NewsArticle from "./NewsArticle";
 // Settings for News API
 function NewsArticles( {city} ) {
     const [errorNews, setErrorNews] = useState(null);
@@ -60,14 +61,10 @@ console.log(formatDate(yesterday));
     <>
     <div className="NewsArticles">
       <h2>News Articles in {city}</h2>
-      <div>
+      <div className="article-layout" >
       {resultsNews &&
           resultsNews.map((article, index) => (
-            <div key={index}>
-              <h3>{article.title}</h3>
-              <p>{article.description}</p>
-              <p>By {article.author}</p>
-            </div>
+            <NewsArticle key={index} article={article} />
           ))
         }                                 
       
