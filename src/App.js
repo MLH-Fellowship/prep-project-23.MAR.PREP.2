@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import './App.css';
-import logo from './mlh-prep.png'
+import logo from './mlh-prep.png';
+import MapComponent from "./map";
 
 function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState("New York City")
   const [results, setResults] = useState(null);
+  const [searchedLocation, setSearchedLocation] = useState(null);
+
+
 
   useEffect(() => {
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&appid=" + process.env.REACT_APP_APIKEY)
@@ -18,6 +22,7 @@ function App() {
           } else {
             setIsLoaded(true);
             setResults(result);
+            setSearchedLocation([result.coord.lat, result.coord.lon]); // Set the coordinates of the searched location
           }
         },
         (error) => {
@@ -28,7 +33,7 @@ function App() {
   }, [city])
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    //return <div>Error: {error.message}</div>;
   } else {
     return <>
       <img className="logo" src={logo} alt="MLH Prep Logo"></img>
@@ -47,6 +52,7 @@ function App() {
             <i><p>{results.name}, {results.sys.country}</p></i>
           </>}
         </div>
+        <MapComponent searchedLocation={searchedLocation} />
       </div>
     </>
   }
