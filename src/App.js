@@ -32,7 +32,7 @@ function App() {
   } else {
     return <>
       <img className="logo" src={logo} alt="MLH Prep Logo"></img>
-      <div>
+      <div className="Page">
         <h2>Enter a city below 👇</h2>
         <input
           type="text"
