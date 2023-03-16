@@ -8,6 +8,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState("New York City");
   const [results, setResults] = useState(null);
+  const [searchedLocation, setSearchedLocation] = useState(null);
 
   useEffect(() => {
     fetch(
@@ -25,6 +26,7 @@ function App() {
           } else {
             setIsLoaded(true);
             setResults(result);
+            setSearchedLocation([result.coord.lat, result.coord.lon]); // Set the coordinates of the searched location
           }
         },
         (error) => {
@@ -63,7 +65,7 @@ function App() {
             )}
           </div>
         </div>
-        <MapComponent />
+        <MapComponent searchedLocation={searchedLocation} />
       </>
     );
   }
