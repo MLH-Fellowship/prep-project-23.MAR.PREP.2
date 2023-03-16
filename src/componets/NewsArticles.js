@@ -1,7 +1,12 @@
-    // Settings for News API
+import { useEffect, useState } from "react";
+import '../NewsArticles.css';
+// Settings for News API
+function NewsArticles( {city} ) {
     const [errorNews, setErrorNews] = useState(null);
     const [isLoadedNews, setIsLoadedNews] = useState(false);
     const [resultsNews, setResultsNews] = useState(null);
+    // const [city, setCity] = useState("New York City")
+
   
     const today = new Date()
     const yesterday = new Date(today)
@@ -28,13 +33,13 @@
 console.log(formatDate(yesterday));
 
   useEffect(() => {
-    fetch("https://newsapi.org/v2/everything?q=Weather%20in " + city + "&from=" + yesterday + "&units=metric" + "&apiKey=" + process.env.REACT_APP_WEATHERNEWSKEY)
+    fetch("https://newsapi.org/v2/everything?q=Weather%20in " + city + "&from=" + formatDate(yesterday) + "&units=metric" + "&apiKey=" + process.env.REACT_APP_WEATHERNEWSKEY)
       .then(res => res.json())
       .then(
         (result) => {
           if (result['cod'] !== 200) {
             // setIsLoaded(false)
-            console.log(result)
+            setResultsNews(Object.values(result.articles).slice(0, 4));
           } else {
             // setIsLoaded(true);
             // setResults(result);
@@ -48,3 +53,28 @@ console.log(formatDate(yesterday));
         }
       )
   }, [city])
+
+  console.log("This is waht", resultsNews);
+
+  return (
+    <>
+    <div className="NewsArticles">
+      <h2>News Articles in {city}</h2>
+      <div>
+      {resultsNews &&
+          resultsNews.map((article, index) => (
+            <div key={index}>
+              <h3>{article.title}</h3>
+              <p>{article.description}</p>
+              <p>By {article.author}</p>
+            </div>
+          ))
+        }                                 
+      
+      </div>
+    
+  </div>
+  </>
+  )
+}
+export default NewsArticles;
