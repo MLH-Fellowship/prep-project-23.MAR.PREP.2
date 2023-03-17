@@ -4,7 +4,7 @@ import NewsArticle from "./NewsArticle";
 
 function NewsArticles({ city }) {
   const [resultsNews, setResultsNews] = useState(null);
-
+  const [noNewsFound, setNoNewsFound] = useState(false); // add this state
   // List of keywords to search for
   const WeatherKeywords = [
     "rainfall", "snow", "heat", "weather", "rain",
@@ -56,29 +56,38 @@ function NewsArticles({ city }) {
 
   // Fetch the articles
   useEffect(() => {
-    fetch(`https://newsapi.org/v2/everything?q=Weather%20in%20${city}&from=${formatDate(yesterday)}&units=metric&apiKey=${process.env.REACT_APP_WEATHERNEWSKEY}`)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          if (result['cod'] !== 200) {
-            // Fetch Articles, and filter out articles that don't contain weather keywords
-            const articles = Object.values(result.articles);
-            const filteredArticles = articles.filter(article => containsWeatherKeyword(article));
+    const timer = setTimeout(() => {
+      fetch(`https://newsapi.org/v2/everything?q=Weather%20in%20${city}&from=${formatDate(yesterday)}&units=metric&apiKey=${process.env.REACT_APP_WEATHERNEWSKEY}`)
+        .then(res => res.json())
+        .then(
+          (result) => {
+            if (result['cod'] !== 200) {
+              // Fetch Articles, and filter out articles that don't contain weather keywords
+              const articles = Object.values(result.articles);
+              const filteredArticles = articles.filter(article => containsWeatherKeyword(article));
 
-            // slice the first 4 articles
-            const ShowingArticles = Object.values(filteredArticles).slice(0, 4);
+              // slice the first 4 articles
+              if (filteredArticles.length === 0) { // check if filteredArticles is empty
+                setResultsNews(null);
+                setNoNewsFound(true); // set noNewsFound to true
+              } else {
+                const ShowingArticles = Object.values(filteredArticles).slice(0, 4);
+                setResultsNews(ShowingArticles);
+                setNoNewsFound(false); // set noNewsFound to false
+              }
+            } else {
 
-            setResultsNews(ShowingArticles);
-          } else {
-
-            // console.log(result)
+              // console.log(result)
+            }
+          },
+          (error) => {
+            // setError(error);
+            // console.log(error)
           }
-        },
-        (error) => {
-          // setError(error);
-          // console.log(error)
-        }
-      )
+        )
+    }, 2000);
+
+    return () => clearTimeout(timer);
   }, [city])
 
   // Preview of the articles
@@ -87,13 +96,17 @@ function NewsArticles({ city }) {
     <>
       <div className="NewsArticles">
         <h2>News Articles in {city}</h2>
-        <div className="article-layout" >
-          {resultsNews &&
-            resultsNews.map((article, index) => (
+        {noNewsFound ? (
+          <p>No news found</p> // render "No news found" message if noNewsFound is true
+        ) : resultsNews ? (
+          <div className="article-layout">
+            {resultsNews.map((article, index) => (
               <NewsArticle key={index} article={article} />
-            ))
-          }
-        </div>
+            ))}
+          </div>
+        ) : (
+          <p>Loading news...</p>
+        )}
       </div>
     </>
   )
