@@ -1,19 +1,3 @@
-// import React from 'react'
-// import { useEffect, useState } from "react";
-// import NewsArticles from './componets/NewsArticles';
-
-// function App() {
-//   const [city, setCity] = React.useState("New York City")
-//   return (
-//     <>
-//       <Weather city={city} setCity={setCity} />
-//       <NewsArticles city={city} />
-//     </>
-//   )
-// }
-
-// export default App
-
 import { useEffect, useState } from "react";
 import './App.css';
 import logo from './mlh-prep.png'
