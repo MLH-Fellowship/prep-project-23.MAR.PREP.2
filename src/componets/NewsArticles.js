@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import '../NewsArticles.css';
 import NewsArticle from "./NewsArticle";
-// Settings for News API
+
 function NewsArticles({ city }) {
-  const [errorNews, setErrorNews] = useState(null);
-  const [isLoadedNews, setIsLoadedNews] = useState(false);
   const [resultsNews, setResultsNews] = useState(null);
-  // const [city, setCity] = useState("New York City")
+
+  // List of keywords to search for
   const WeatherKeywords = [
     "rainfall", "snow", "heat", "weather", "rain",
     "cloud", "temperature", "overcast", "sunrise",
-    "tornado", "sunset", "humidity", "cold", "heat",
+    "tornado", "sunset", "humidity", "cold",
     "wind", "cloudy", "heat wave", "fog", "breeze", "humid",
     "blustery", "thunder", "heat index", "thunderstorm",
     "drought", "tropical", "water cycle", "temperate",
@@ -34,10 +33,7 @@ function NewsArticles({ city }) {
   const yesterday = new Date(today)
   yesterday.setDate(yesterday.getDate() - 2)
 
-  // console.log(yesterday)
-  // console.log(today)
-
-  // Fetching data From News API
+  // Make sure the date is in the format YYYY-MM-DD
   function formatDate(date) {
     var d = new Date(date),
       month = '' + (d.getMonth() + 1),
@@ -52,45 +48,40 @@ function NewsArticles({ city }) {
     return [year, month, day].join('-');
   }
 
+  // Check if the article contains a weather keyword
   function containsWeatherKeyword(article) {
     const title = article.title.toLowerCase();
     return WeatherKeywords.some(keyword => title.includes(keyword));
   }
 
-
-  // weatherArticles.forEach(article => {
-  //   if (containsWeatherKeyword(article.description)) {
-  //     console.log(`${article.title} contains weather keywords`);
-  //   }
-  // });
-
-
-  // console.log(formatDate(yesterday));
-
+  // Fetch the articles
   useEffect(() => {
-    fetch("https://newsapi.org/v2/everything?q=Weather%20in " + city + "&from=" + formatDate(yesterday) + "&units=metric" + "&apiKey=" + process.env.REACT_APP_WEATHERNEWSKEY)
+    fetch(`https://newsapi.org/v2/everything?q=Weather%20in%20${city}&from=${formatDate(yesterday)}&units=metric&apiKey=${process.env.REACT_APP_WEATHERNEWSKEY}`)
       .then(res => res.json())
       .then(
         (result) => {
           if (result['cod'] !== 200) {
-            const articles = Object.values(result.articles).slice(0, 4);
+            // Fetch Articles, and filter out articles that don't contain weather keywords
+            const articles = Object.values(result.articles);
             const filteredArticles = articles.filter(article => containsWeatherKeyword(article));
-            setResultsNews(filteredArticles);
+
+            // slice the first 4 articles
+            const ShowingArticles = Object.values(filteredArticles).slice(0, 4);
+
+            setResultsNews(ShowingArticles);
           } else {
-            // setIsLoaded(true);
-            // setResults(result);
+
             // console.log(result)
           }
         },
         (error) => {
-          // setIsLoaded(true);
           // setError(error);
           // console.log(error)
         }
       )
   }, [city])
 
-  // console.log("This is waht", resultsNews);
+  // Preview of the articles
 
   return (
     <>
