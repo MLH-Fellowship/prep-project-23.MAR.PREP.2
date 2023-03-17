@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import './App.css';
 import logo from './mlh-prep.png'
+import Box from './components/SuggestedThings/Box';
 
 function App() {
   const [error, setError] = useState(null);
@@ -9,7 +10,7 @@ function App() {
   const [results, setResults] = useState(null);
 
   useEffect(() => {
-    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&appid=" + process.env.REACT_APP_APIKEY)
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=" + process.env.REACT_APP_APIKEY)
       .then(res => res.json())
       .then(
         (result) => {
@@ -47,6 +48,17 @@ function App() {
             <i><p>{results.name}, {results.sys.country}</p></i>
           </>}
         </div>
+
+        <h2 className="suggested-things-heading">Things you need to carry 🎒</h2>
+        {/* Displays the 'Box' component if results(API response) is not null.
+        Here, the API response is passed as props to the Box component*/}
+        {results == null ? 
+        <div>
+          <h2>Loading...</h2>
+        </div> : 
+        <div>
+          <Box weather={results} />
+        </div>}
       </div>
     </>
   }
