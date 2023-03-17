@@ -10,13 +10,12 @@ function App() {
   const [results, setResults] = useState(null);
   const [searchedLocation, setSearchedLocation] = useState(null);
 
-  useEffect(() => {
+  const handleCitySubmit = (event) => {
+    event.preventDefault();
+    setIsLoaded(false);
+    setResults(null);
     fetch(
-      "https://api.openweathermap.org/data/2.5/weather?q=" +
-        city +
-        "&units=metric" +
-        "&appid=" +
-        process.env.REACT_APP_APIKEY
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_API_KEY}`
     )
       .then((res) => res.json())
       .then(
@@ -34,21 +33,24 @@ function App() {
           setError(error);
         }
       );
-  }, [city]);
+  };
 
   if (error) {
-    // return <div>Error: {error.message}</div>;
+    console.log(error);
   } else {
     return (
       <>
         <img className="logo" src={logo} alt="MLH Prep Logo"></img>
         <div>
           <h2>Enter a city below 👇</h2>
-          <input
-            type="text"
-            value={city}
-            onChange={(event) => setCity(event.target.value)}
-          />
+          <form onSubmit={handleCitySubmit}>
+            <input
+              type="text"
+              value={city}
+              onChange={(event) => setCity(event.target.value)}
+            />
+            <button type="submit">Submit</button>
+          </form>
           <div className="Results">
             {!isLoaded && <h2>Loading...</h2>}
             {console.log(results)}

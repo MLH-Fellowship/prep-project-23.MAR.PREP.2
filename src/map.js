@@ -6,6 +6,7 @@ import iconShadow from "leaflet/dist/images/marker-shadow.png";
 
 export default function MapComponent({ searchedLocation }) {
   const [map, setMap] = useState(null);
+  const [marker, setMarker] = useState(null);
 
   useEffect(() => {
     // create a new leaflet map instance
@@ -43,13 +44,21 @@ export default function MapComponent({ searchedLocation }) {
       // update the map view to the searched location
       map.setView(searchedLocation, 13);
 
+      // remove the previous marker, if any
+      if (marker) {
+        map.removeLayer(marker);
+      }
+
       // add a marker to the map at the searched location
-      const marker = L.marker(searchedLocation).addTo(map);
+      const newMarker = L.marker(searchedLocation).addTo(map);
 
       // add a popup to the marker
-      marker.bindPopup("Searched Location").openPopup();
+      newMarker.bindPopup("Searched Location").openPopup();
+
+      // set the new marker to the state
+      setMarker(newMarker);
     }
-  }, [map, searchedLocation]);
+  }, [searchedLocation]);
 
   return (
     <div id="map" style={{ height: "400px" }}>
