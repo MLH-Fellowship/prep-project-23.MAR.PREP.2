@@ -18,7 +18,7 @@ const WeatherByHourData = (results) => {
             })
 
 
-    }, [date, timeOption])
+    }, [cityName, date, timeOption])
 
     const filterDataByDate = (date, timeOption) => {
         let dates = [];
@@ -27,7 +27,7 @@ const WeatherByHourData = (results) => {
             dates.push(data.dt_txt.slice(0,10))
         }))
 
-        if (timeOption === "SelectTime" || timeOption === '') {
+        if (timeOption === "SelectTime" || timeOption === '' || cityName.length === 3) {
             return <div>
                 <h1>Please select and time and date</h1>
             </div>
@@ -46,6 +46,8 @@ const WeatherByHourData = (results) => {
             </div>
         })
     }
+
+    
 
     return (
         <div>

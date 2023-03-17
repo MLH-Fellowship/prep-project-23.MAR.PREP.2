@@ -40,7 +40,6 @@ let year = currentDate.getFullYear();
   }, [city, timeOption, date])
 
   
-  
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -62,13 +61,13 @@ let year = currentDate.getFullYear();
           value={timeOption}
           >
             <option value="SelectTime">Select Time</option>
-            <option value="03:00:00">3AM</option>
-            <option value="06:00:00">6AM</option>
-            <option value="09:00:00">9AM</option>
-            <option value="12:00:00">12PM</option>
-            <option value="15:00:00">1PM</option>
-            <option value="18:00:00">4PM</option>
-            <option value="21:00:00">7PM</option>
+            <option value="03:00:00">03:00AM</option>
+            <option value="06:00:00">06:00AM</option>
+            <option value="09:00:00">09:00AM</option>
+            <option value="12:00:00">12:00PM</option>
+            <option value="15:00:00">15:00PM</option>
+            <option value="18:00:00">18:00PM</option>
+            <option value="21:00:00">21:00PM</option>
           </select>
         <div className="Results">
           {!isLoaded && <h2>Loading...</h2>}
