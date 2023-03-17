@@ -1,5 +1,5 @@
 import React from 'react';
-import '../NewsArticles.css';
+import './NewsArticles.css';
 
 function NewsArticle( {article} ) {
   return (
@@ -11,6 +11,7 @@ function NewsArticle( {article} ) {
           <h2> {article.title} </h2>
           <p className=''>{article.description}</p>
         </div>
+        <a href={article.url} target="_blank">Read More</a>
     </div>
   )
 }
