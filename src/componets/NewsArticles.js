@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import '../NewsArticles.css';
+import './NewsArticles.css';
 import NewsArticle from "./NewsArticle";
 
 function NewsArticles({ city }) {
