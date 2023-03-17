@@ -1,34 +1,34 @@
-.article-layout{
+.article-layout {
     display: flex;
     justify-content: space-evenly;
 
 }
 
-.news-img{
+.news-img {
     width: 100%;
     height: 200px;
 }
 
-.news-card{
+.news-card {
     width: 20%;
     border: 1px solid #fff;
     border-radius: 5px;
     background-color: rgba(250, 235, 215, 0.186);
+    padding-bottom: 20px;
 }
 
-.card-content
-{
+.card-content {
     padding: 10px;
 }
 
-.card-content p{
+.card-content p {
     text-align: left;
 }
 
-.news-card a{
+.news-card a {
     text-transform: capitalize;
     text-decoration: none;
-    border:1px solid #ccc;
+    border: 1px solid #ccc;
     padding: 4px;
     border-radius: 50px;
     color: yellow;
