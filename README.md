@@ -26,10 +26,8 @@ Once you have cloned the `prep-project-23.MAR.PREP.2` repository into your local
 ```bash
    $ cd prep-project-23.MAR.PREP.2
 ```
-run the below command if you wish to open the project in Visual Studio code editor
-```
-  $ code .
-```
+
+Next, open the project folder in your favorite code editor/IDE to start coding(the actual game)
 ### 4. Installing node and npm:
 You need to install node into your machine. navigate to [Node.js Download Page](https://nodejs.org/en/download/) and download the latest version that suits your OS and system architecture(x32, x64, x86)
 check the version of node using below command:
@@ -60,14 +58,18 @@ Then run the below command to start the development server:
    $ npm start
 ```
 
-if the react-scripts version is < 5.0.0 then it might throw this error `Error: error:0308010c:digital envelope routines::unsupported`, then try updating your react-scripts version. To do that run the following commands:
+If the development server didn't start and if it throws the error `Error: error:0308010c:digital envelope routines::unsupported`, then one of the possible fix is to `update the react-scripts`
+Steps to do the fix:
+1. Check the `package.json` file
+2. see if `react-scripts` version under `dependencies`is < 5.0.0. if so try updating using below commands:
 ```bash
    $ npm uninstall react-scripts
    $ npm install react-scripts
 ```
-
-> Disclaimer: Do not run `$ npm audit fix --force` to fix the vulnerabilities because this breaks/downgrades the react-scripts version
+3. then run the command `$ npm start` to start the development server on your local machine again.
 
 For more information, refer this [link](https://www.freecodecamp.org/news/error-error-0308010c-digital-envelope-routines-unsupported-node-error-solved/)
+
+> Disclaimer: Do not run `$ npm audit fix --force` to fix the vulnerabilities because this breaks/downgrades the react-scripts version
 
 
