@@ -9,12 +9,8 @@ function App() {
   const [results, setResults] = useState([]);
   const [buttonClick, setButtonClick] = useState(false);
 
-  const APIKEY = process.env.REACT_APP_APIKEY;
-
-  console.log(APIKEY);
-
   useEffect(() => {
-    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&appid=" + APIKEY)
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric&appid=" + process.env.REACT_APP_APIKEY)
       .then(res => res.json())
       .then(
         (result) => {
@@ -44,8 +40,8 @@ function App() {
           name="cityinbox"
           value={city}
           onChange={event => setCity(event.target.value)} />
-        <button onClick={() => setButtonClick(!buttonClick)}>Search</button>
-        <button onClick={() => setResults([])}>Clear All</button>
+        <button class="buttons" onClick={() => setButtonClick(!buttonClick)}>Search</button>
+        <button class="buttons" onClick={() => setResults([])}>Clear All</button>
         <div className="Results">
           {!isLoaded && <h2>Loading...</h2>}
           {console.log(results)}

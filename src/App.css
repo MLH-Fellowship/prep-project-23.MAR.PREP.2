@@ -30,3 +30,14 @@ input {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
+.buttons {
+  background-color: rgb(38, 90, 143);
+  border: none;
+  color: white;
+  padding: 13px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 3px;
+}
