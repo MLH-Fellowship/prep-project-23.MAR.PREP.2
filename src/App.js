@@ -4,6 +4,8 @@ import './App.css';
 import logo from './mlh-prep.png'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { addDays } from "date-fns";
+import calendarIcon from './images/55281.png'
 
 function App(props) {
   const [error, setError] = useState(null);
@@ -12,23 +14,23 @@ function App(props) {
   const [results, setResults] = useState(null);
   const [timeOption, setTimeOption] = useState("");
   const [date, setDate] = useState(new Date());
-  
+
 
   const ExampleCustomTimeInput = () => (
     <select
-          onChange={e => setTimeOption(e.target.value)}
-          value={timeOption}
-          style={{ border: "solid 1px pink" }}
-          >
-            <option value="SelectTime">Select Time</option>
-            <option value="03:00:00">03:00AM</option>
-            <option value="06:00:00">06:00AM</option>
-            <option value="09:00:00">09:00AM</option>
-            <option value="12:00:00">12:00PM</option>
-            <option value="15:00:00">15:00PM</option>
-            <option value="18:00:00">18:00PM</option>
-            <option value="21:00:00">21:00PM</option>
-          </select>
+      onChange={e => setTimeOption(e.target.value)}
+      value={timeOption}
+      style={{ border: "solid 1px pink" }}
+    >
+      <option value="SelectTime">Select Time</option>
+      <option value="03:00:00">03:00AM</option>
+      <option value="06:00:00">06:00AM</option>
+      <option value="09:00:00">09:00AM</option>
+      <option value="12:00:00">12:00PM</option>
+      <option value="15:00:00">15:00PM</option>
+      <option value="18:00:00">18:00PM</option>
+      <option value="21:00:00">21:00PM</option>
+    </select>
   );
 
   useEffect(() => {
@@ -59,38 +61,27 @@ function App(props) {
       <img className="logo" src={logo} alt="MLH Prep Logo"></img>
       <div>
         <h2>Enter a city below 👇</h2>
-        <input
-          type="text"
-          value={city}
-          onChange={event => setCity(event.target.value)} />
-        {/* <input type="date"
-          value={date}
-          onChange={e => setDate(e.target.value)}
-          /> */}
-          {/* <select
-          onChange={e => setTimeOption(e.target.value)}
-          value={timeOption}
-          >
-            <option value="SelectTime">Select Time</option>
-            <option value="03:00:00">03:00AM</option>
-            <option value="06:00:00">06:00AM</option>
-            <option value="09:00:00">09:00AM</option>
-            <option value="12:00:00">12:00PM</option>
-            <option value="15:00:00">15:00PM</option>
-            <option value="18:00:00">18:00PM</option>
-            <option value="21:00:00">21:00PM</option>
-          </select> */}
+        <div className="enter-city-div">
+          <input
+            type="text"
+            value={city}
+            onChange={event => setCity(event.target.value)} />
 
-        <DatePicker
-          selected={date}
-          onChange={(date) => setDate(date)}
-          showTimeInput
-          customTimeInput={<ExampleCustomTimeInput />}
-        />
-
+          <label>
+            <DatePicker
+              excludeDates={[new Date() + 1]}
+              selected={date}
+              onChange={(date) => setDate(date)}
+              showTimeInput
+              customTimeInput={<ExampleCustomTimeInput />}
+              minDate={new Date()}
+              maxDate={addDays(new Date(), 5)}
+            />
+            {/* <span><img src={calendarIcon} alt="calendar icon" className="calendarIcon"></img></span> */}
+          </label>
+        </div>
         <div className="Results">
           {!isLoaded && <h2>Loading...</h2>}
-          {console.log(results)}
           {isLoaded && results && <>
             <h3>{results.weather[0].main}</h3>
             <p>Feels like {results.main.feels_like}°C</p>

@@ -12,6 +12,14 @@ body {
   margin-top: 20px;
 }
 
+.calendarIcon {
+  width: 20%;
+  height: 80%;
+  position: relative;
+  top: 4px;
+  right: 70px;
+}
+
 input {
   padding: 10px;
   border-radius: 4px;
@@ -28,5 +36,27 @@ input {
   color: black;
   padding: 10px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.enter-city-div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 15%;
+  margin: 0 auto;
+}
+
+.react-datepicker-wrapper{
+  width: fit-content !important;
+  
+}
+
+.react-datepicker__input-container input{
+  cursor: pointer;
+  display: hidden;
+}
+
+.react-datepicker__input-container:active {
+  display: block;
 }
 
