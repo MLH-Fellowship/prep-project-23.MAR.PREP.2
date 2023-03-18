@@ -5,7 +5,7 @@ const WeatherByHourData = (results) => {
     const [weatherData, setWeatherData] = useState([])
 
     const timeOption = results.timeOption
-    const date = results.date
+    const date = results.date.toISOString().slice(0,10)
     const cityName = results.results.name
 
     useEffect(() => {
@@ -20,6 +20,8 @@ const WeatherByHourData = (results) => {
 
     }, [cityName, date, timeOption])
 
+    console.log(date, timeOption)
+
     const filterDataByDate = (date, timeOption) => {
         let dates = [];
 
@@ -27,7 +29,7 @@ const WeatherByHourData = (results) => {
             dates.push(data.dt_txt.slice(0,10))
         }))
 
-        if (timeOption === "SelectTime" || timeOption === '' || cityName.length === 3) {
+        if (timeOption === "SelectTime" || timeOption === '') {
             return <div>
                 <h1>Please select and time and date</h1>
             </div>

@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import WeatherByHourData from "./components/WeatherByHourData";
 import './App.css';
 import logo from './mlh-prep.png'
-import Select from "react-select";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function App(props) {
   const [error, setError] = useState(null);
@@ -10,15 +11,25 @@ function App(props) {
   const [city, setCity] = useState("New York City")
   const [results, setResults] = useState(null);
   const [timeOption, setTimeOption] = useState("");
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState(new Date());
   
-const currentDate = new Date();
 
-let day = currentDate.getDate();
-let month = currentDate.getMonth() + 1;
-let year = currentDate.getFullYear();
-
-
+  const ExampleCustomTimeInput = () => (
+    <select
+          onChange={e => setTimeOption(e.target.value)}
+          value={timeOption}
+          style={{ border: "solid 1px pink" }}
+          >
+            <option value="SelectTime">Select Time</option>
+            <option value="03:00:00">03:00AM</option>
+            <option value="06:00:00">06:00AM</option>
+            <option value="09:00:00">09:00AM</option>
+            <option value="12:00:00">12:00PM</option>
+            <option value="15:00:00">15:00PM</option>
+            <option value="18:00:00">18:00PM</option>
+            <option value="21:00:00">21:00PM</option>
+          </select>
+  );
 
   useEffect(() => {
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&appid=" + process.env.REACT_APP_APIKEY)
@@ -39,7 +50,7 @@ let year = currentDate.getFullYear();
       )
   }, [city, timeOption, date])
 
-  
+
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -52,11 +63,11 @@ let year = currentDate.getFullYear();
           type="text"
           value={city}
           onChange={event => setCity(event.target.value)} />
-          <input type="date"
+        {/* <input type="date"
           value={date}
           onChange={e => setDate(e.target.value)}
-          />
-          <select
+          /> */}
+          {/* <select
           onChange={e => setTimeOption(e.target.value)}
           value={timeOption}
           >
@@ -68,7 +79,15 @@ let year = currentDate.getFullYear();
             <option value="15:00:00">15:00PM</option>
             <option value="18:00:00">18:00PM</option>
             <option value="21:00:00">21:00PM</option>
-          </select>
+          </select> */}
+
+        <DatePicker
+          selected={date}
+          onChange={(date) => setDate(date)}
+          showTimeInput
+          customTimeInput={<ExampleCustomTimeInput />}
+        />
+
         <div className="Results">
           {!isLoaded && <h2>Loading...</h2>}
           {console.log(results)}
@@ -83,11 +102,11 @@ let year = currentDate.getFullYear();
       {results === null ? <div>
         <h1>Loading...</h1>
       </div> : <div>
-      <WeatherByHourData results={results} date={date} timeOption={timeOption}/>
-        </div>}
+        <WeatherByHourData results={results} date={date} timeOption={timeOption} />
+      </div>}
 
-  
-      
+
+
     </>
   }
 }
