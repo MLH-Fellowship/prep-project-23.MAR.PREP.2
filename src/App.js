@@ -61,24 +61,26 @@ function App(props) {
       <img className="logo" src={logo} alt="MLH Prep Logo"></img>
       <div>
         <h2>Enter a city below 👇</h2>
-        <div className="enter-city-div">
-          <input
-            type="text"
-            value={city}
-            onChange={event => setCity(event.target.value)} />
 
-          <label>
-            <DatePicker
-              excludeDates={[new Date() + 1]}
-              selected={date}
-              onChange={(date) => setDate(date)}
-              showTimeInput
-              customTimeInput={<ExampleCustomTimeInput />}
-              minDate={new Date()}
-              maxDate={addDays(new Date(), 5)}
-            />
-            {/* <span><img src={calendarIcon} alt="calendar icon" className="calendarIcon"></img></span> */}
-          </label>
+
+        <input
+          type="text"
+          value={city}
+          onChange={event => setCity(event.target.value)} />
+
+        <div className="date-picker-div">
+          <DatePicker
+            excludeDates={[new Date()]}
+            selected={date}
+            onChange={(date) => setDate(date)}
+            showTimeInput
+            customTimeInput={<ExampleCustomTimeInput />}
+            minDate={new Date()}
+            maxDate={addDays(new Date(), 5)}
+          />
+          <div className="pic-container">
+            <img src={calendarIcon} alt="calendar icon" className="calendarIcon"></img>
+          </div>
         </div>
         <div className="Results">
           {!isLoaded && <h2>Loading...</h2>}
