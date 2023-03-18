@@ -4,7 +4,7 @@ import './NewsArticles.css';
 function NewsArticle({ article }) {
   return (
     <div className='news-card' >
-      <div>
+      <div class="news-image-container">
         <img className='news-img' src={article.urlToImage} alt={article.title} />
       </div>
       <div className="card-content">
@@ -15,7 +15,9 @@ function NewsArticle({ article }) {
           `${article.description.substring(0, 200)}...` : article.description
         }</p>
       </div>
-      <a href={article.url} target="_blank">Read More</a>
+      <div className='news-link'>
+        <a href={article.url} target="_blank">Read More</a>
+      </div>
     </div>
   )
 }
