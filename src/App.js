@@ -68,9 +68,11 @@ function App(props) {
           value={city}
           onChange={event => setCity(event.target.value)} />
 
-        <div className="date-picker-div">
+        <span>
+          
+          <div className="date-picker-div">
           <DatePicker
-            excludeDates={[new Date()]}
+            
             selected={date}
             onChange={(date) => setDate(date)}
             showTimeInput
@@ -78,10 +80,11 @@ function App(props) {
             minDate={new Date()}
             maxDate={addDays(new Date(), 5)}
           />
-          <div className="pic-container">
+        </div>
+        <div className="pic-container">
             <img src={calendarIcon} alt="calendar icon" className="calendarIcon"></img>
           </div>
-        </div>
+        </span>
         <div className="Results">
           {!isLoaded && <h2>Loading...</h2>}
           {isLoaded && results && <>

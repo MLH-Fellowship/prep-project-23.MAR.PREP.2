@@ -34,8 +34,22 @@ const WeatherByHourData = (results) => {
         
         return weatherData.filter(data => data.dt_txt === `${date} ${timeOption}`).map(filteredData => {
             return <div className="Results">
-                <h3>{filteredData.weather[0].main}</h3>
-                <p>Feels like {filteredData.main.feels_like}°C</p>
+                <h2>Date Selected</h2>
+                <div className='weather-box'>
+                <img src={`https://openweathermap.org/img/wn/${filteredData.weather[0].icon}@2x.png`} alt="weather icon"></img>
+                <h3>{filteredData.main.feels_like}°C</h3>
+                </div>
+                <h2>{filteredData.weather[0].main}</h2>
+                <div className='bottom-weather-box'>
+                    <div>
+                        <h2>Humidity</h2>
+                        <h3>{filteredData.main.humidity}</h3>
+                    </div>
+                    <div>
+                        <h2>Wind Speed</h2>
+                        <h3>{filteredData.wind.speed}</h3>
+                    </div>
+                </div>
             </div>
         })
     }
