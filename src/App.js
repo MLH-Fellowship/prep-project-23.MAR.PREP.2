@@ -6,10 +6,14 @@ function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState("New York City")
+  const [stateCode, setStateCode] = useState ("NY")
+  const [country, setCountry] = useState ("USA")
   const [results, setResults] = useState(null);
 
   useEffect(() => {
-    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&appid=" + process.env.REACT_APP_APIKEY)
+    // console.log (`https://api.openweathermap.org/geo/1.0/direct?q=${city}&state=${stateCode}&country=${country}&limit=1&appid=${apiKey}`)
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&state=${stateCode}&country=${country}&limit=1&appid=${process.env.REACT_APP_APIKEY}`)
+    
       .then(res => res.json())
       .then(
         (result) => {
@@ -25,7 +29,7 @@ function App() {
           setError(error);
         }
       )
-  }, [city])
+  }, [city, stateCode, country])
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -33,11 +37,13 @@ function App() {
     return <>
       <img className="logo" src={logo} alt="MLH Prep Logo"></img>
       <div>
-        <h2>Enter a city below 👇</h2>
+        <h2>Enter a city and country below 👇</h2>
         <input
           type="text"
-          value={city}
-          onChange={event => setCity(event.target.value)} />
+          value={`${city}, ${stateCode}, ${country}`}
+          onChange={event => 
+          setCity(event.target.value)} 
+          />
         <div className="Results">
           {!isLoaded && <h2>Loading...</h2>}
           {console.log(results)}
