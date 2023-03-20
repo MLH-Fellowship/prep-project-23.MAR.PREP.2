@@ -19,7 +19,7 @@ const WeatherByHourData = (results) => {
             })
 
 
-    }, [cityName, date, timeOption])
+    }, [date, timeOption])
 
     useEffect(() => {
         checkParent()
@@ -29,7 +29,7 @@ const WeatherByHourData = (results) => {
     const filterDataByDate = (date, timeOption) => {
 
         if (timeOption === "SelectTime" || timeOption === '') {
-            return <div className='error'>
+            return <div className='error-message'>
                 <h1>Please select a time and date to get weather information</h1>
             </div>
         } 
