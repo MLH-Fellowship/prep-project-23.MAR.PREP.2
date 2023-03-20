@@ -2,28 +2,31 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
 const WeatherByHourData = (results) => {
-    const [weatherData, setWeatherData] = useState([])
-    const [filterData, setFilterData] = useState([])
-    const [success, setSuccess] = useState(Boolean);
-    const timeOption = results.timeOption
-    const date = results.date.toISOString().slice(0,10)
-    const cityName = results.results.name
+    const [weatherData, setWeatherData] = useState([]);
+    const [count, setCount] = useState(0)
+    const timeOption = results.timeOption;
+    const date = results.date.toISOString().slice(0, 10);
+    const cityName = results.results.name;
 
     useEffect(() => {
         axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=${process.env.REACT_APP_APIKEY}`)
             .then(res => {
                 setWeatherData(res.data.list)
+                setCount(count + 1)
             })
             .catch(err => {
                 console.log(err.message)
             })
 
 
-    }, [cityName, date, timeOption, filterData])
+    }, [cityName, date, timeOption])
+
+    useEffect(() => {
+        checkParent()
+    }, [])
 
 
     const filterDataByDate = (date, timeOption) => {
-
 
         if (timeOption === "SelectTime" || timeOption === '') {
             return <div className='error'>
@@ -31,16 +34,12 @@ const WeatherByHourData = (results) => {
             </div>
         } 
 
-        
-        
-
-        
         return weatherData.filter(data => data.dt_txt === `${date} ${timeOption}`).map(filteredData => {
             return <div className="Specific-Results">
                 <h2>Date Selected</h2>
                 <div className='weather-box'>
-                <img src={`https://openweathermap.org/img/wn/${filteredData.weather[0].icon}@2x.png`} alt="weather icon"></img>
-                <h3>{filteredData.main.feels_like}°C</h3>
+                    <img src={`https://openweathermap.org/img/wn/${filteredData.weather[0].icon}@2x.png`} alt="weather icon"></img>
+                    <h3>{filteredData.main.feels_like}°C</h3>
                 </div>
                 <h2>{filteredData.weather[0].main}</h2>
                 <div className='bottom-weather-box'>
@@ -55,19 +54,18 @@ const WeatherByHourData = (results) => {
                 </div>
             </div>
         })
-
     }
 
-    const checkParent = (parent,child) => {
+    const checkParent = (parent, child) => {
         parent = document.querySelector(".component-window")
         child = document.querySelector(".Specific-Results")
-        console.log(child,parent)
-        if (child === null) {
-            return <h1>Data is not available</h1>
+        console.log(parent, child)
+        if (child === null && count > 1) {
+            console.log(count)
+            return <h1 className='error-message'>Data not available</h1>
         }
-    }
 
-    
+    }
 
     return (
         <div className='component-window'>

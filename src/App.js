@@ -69,7 +69,6 @@ function App(props) {
         <span>
           <div className="date-picker-div">
           <DatePicker
-            
             selected={date}
             onChange={(date) => setDate(date)}
             showTimeInput
