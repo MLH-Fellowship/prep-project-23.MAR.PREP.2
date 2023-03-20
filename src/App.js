@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import logo from "./mlh-prep.png";
 
-import ThemedBackground from "./components/ThemedBackground";
+import ThemedBackground from "./components/theme/ThemedBackground";
+import ThemeSelector from "./components/theme/javascript-jaguars-only/ThemeSelector";
 
 function App() {
   const [error, setError] = useState(null);
@@ -64,7 +65,9 @@ function App() {
             )}
           </div>
         </div>
-        <ThemedBackground weatherCondition={results.weather[0].main} />
+        {/* <ThemedBackground weatherCondition={results.weather[0].main} /> */}
+        <ThemedBackground weatherCondition={"Clouds"} />
+        <ThemeSelector />
       </>
     );
   }
