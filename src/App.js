@@ -23,6 +23,7 @@ function App(props) {
       style={{ border: "solid 1px pink" }}
     >
       <option value="SelectTime">Select Time</option>
+      <option value="00:00:00">00:00AM</option>
       <option value="03:00:00">03:00AM</option>
       <option value="06:00:00">06:00AM</option>
       <option value="09:00:00">09:00AM</option>
@@ -52,8 +53,6 @@ function App(props) {
       )
   }, [city, timeOption, date])
 
-
-
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
@@ -62,14 +61,12 @@ function App(props) {
       <div>
         <h2>Enter a city below 👇</h2>
 
-
         <input
           type="text"
           value={city}
           onChange={event => setCity(event.target.value)} />
 
         <span>
-          
           <div className="date-picker-div">
           <DatePicker
             
@@ -100,8 +97,6 @@ function App(props) {
       </div> : <div>
         <WeatherByHourData results={results} date={date} timeOption={timeOption} />
       </div>}
-
-
 
     </>
   }
