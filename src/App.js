@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Sun from "./Sun";
 import './App.css';
 import logo from './mlh-prep.png'
 
@@ -44,6 +45,7 @@ function App() {
           {isLoaded && results && <>
             <h3>{results.weather[0].main}</h3>
             <p>Feels like {results.main.feels_like}°C</p>
+            <Sun latitude={results.coord.lat} longitude={results.coord.lon} timezone={results.timezone} />
             <i><p>{results.name}, {results.sys.country}</p></i>
           </>}
         </div>
