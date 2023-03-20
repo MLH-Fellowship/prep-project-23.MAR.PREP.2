@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    width: 30%;
+    margin-top: 20px;
+    padding: 10px;
+    box-shadow: 0 3px 8px rgba(170,230,239,0.8), 0 3px 8px rgba(170,230,239,0.8);
+    margin-left: 150px;
+    border-radius: 8px;
+}
+
+.h2_pollution {
+    flex: 1;
+    margin: 10px;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #cee8f0;
+    font-size: 1.8em;
+}
+
+img {
+    flex: 1;
+    max-height: 20%;
+}
+
