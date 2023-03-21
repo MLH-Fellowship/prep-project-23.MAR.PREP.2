@@ -37,22 +37,25 @@ const WeatherByHourData = (results) => {
         return weatherData.filter(data => data.dt_txt === `${date} ${timeOption}`).map(filteredData => {
             console.log(filteredData)
             return <div className="Specific-Results">
-                <h2>Date Selected</h2>
-                <div className='weather-box'>
-                    <img src={`https://openweathermap.org/img/wn/${filteredData.weather[0].icon}@2x.png`} alt="weather icon"/>
-                    <h3>{filteredData.main.feels_like}°C</h3>
+                <div className='weather-icon-container'>
+                    <img src={`https://openweathermap.org/img/wn/${filteredData.weather[0].icon}@2x.png`} alt="weather icon" className='weather-icon'/>
                 </div>
-                <h2>{filteredData.weather[0].main}</h2>
-                <div className='bottom-weather-box'>
-                    <div>
-                        <h2>Humidity</h2>
-                        <h3>{filteredData.main.humidity}</h3>
-                    </div>
-                    <div>
-                        <h2>Wind Speed</h2>
-                        <h3>{filteredData.wind.speed}</h3>
-                    </div>
-                </div>
+                <table>
+                    <tr>
+                        <th>Temperature</th>
+                        <th>Humidity</th>
+                        <th>Wind Speed</th>
+                        <th>Outside</th>
+                    </tr>
+                    <tr>
+                        <td>{filteredData.main.feels_like}°C</td>
+                        <td>{filteredData.main.humidity}</td>
+                        <td>{filteredData.wind.speed} mph</td>
+                        <td>{filteredData.weather[0].main}</td>
+                    </tr>
+                </table>
+                
+                
             </div>
         })
     }

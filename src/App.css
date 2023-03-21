@@ -36,6 +36,8 @@ input {
 }
 
 .Specific-Results {
+  display: flex;
+  flex-direction: row;
   background-color: white;
   margin-left: 150px;
   margin-right: 150px;
@@ -99,5 +101,69 @@ input {
 
 .react-datepicker__input-container:active {
   display: block;
+}
+
+th {
+  font-size: 2vw;
+  width: 15vw;
+  background: #333; 
+  color: white; 
+  font-weight: bold; 
+  padding: 6px; 
+  border: 1px solid #ccc; 
+  text-align: center;
+}
+
+td {
+  font-size: 1.9vw;
+  width: 15vw;
+  padding: 6px; 
+  border: 1px solid #ccc; 
+  text-align: center;
+}
+
+.weather-icon-container{
+  width: 15vw;
+  height: 200px;
+  border: 2px solid lightskyblue;
+  background-color: lightslategray;
+}
+
+.weather-icon {
+  width: 100%;
+  height: 100%;
+}
+
+@media only screen and (max-width: 1024px) {
+  .Specific-Results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 658px) {
+  .weather-icon-container{
+    width: 100%;
+  }
+  tr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  th {
+    width: 100%;
+  }
+
+  td {
+    width: 100%;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  
 }
 
