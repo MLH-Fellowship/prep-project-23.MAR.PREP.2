@@ -15,7 +15,7 @@ function App() {
     setIsLoaded(false);
     setResults(null);
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_API_KEY}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_APIKEY}`
     )
       .then((res) => res.json())
       .then(
