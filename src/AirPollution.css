@@ -16,8 +16,8 @@
     font-size: 1.8em;
 }
 
-img {
+.airpol_img {
     flex: 1;
-    max-height: 20%;
+    max-width: 30%;
 }
 

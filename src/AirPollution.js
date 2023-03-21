@@ -75,7 +75,7 @@ function AirPollution(props) {
         return (
             <div className='container'>
                 <h2 className='h2_pollution'>Current Air Quality: {pollutionLevel} </h2>
-                <img src={pollutionImgSrc} alt="The Air Quality Today Is: "/>
+                <img className='airpol_img' src={pollutionImgSrc} alt="The Air Quality Today Is: "/>
             </div>
         );
 
