@@ -22,7 +22,7 @@ const WeatherByHourData = (results) => {
     }, [cityName, date, timeOption])
 
     useEffect(() => {
-        checkParent()
+        checkChildForErrorMessage()
     }, [])
 
 
@@ -63,7 +63,7 @@ const WeatherByHourData = (results) => {
     // This method is important because it will allow for the user to know that the data that they request is not
     // available due to the limitations of the API. 
 
-    const checkParent = (child) => {
+    const checkChildForErrorMessage = (child) => {
         child = document.querySelector(".Specific-Results")
         if (child === null && count > 1) {
             return <h1 className='error-message'>Data not available</h1>
@@ -73,7 +73,7 @@ const WeatherByHourData = (results) => {
     return (
         <div className='component-window'>
             {filterDataByDate(date, timeOption)}
-            {checkParent()}
+            {checkChildForErrorMessage()}
         </div>
     )
 }
