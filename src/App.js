@@ -65,8 +65,10 @@ function App() {
             )}
           </div>
         </div>
-        {/* <ThemedBackground weatherCondition={results.weather[0].main} /> */}
-        <ThemedBackground weatherCondition={"Clouds"} />
+
+        {results && (
+          <ThemedBackground weatherCondition={results?.weather[0].main} />
+        )}
         <ThemeSelector />
       </>
     );
