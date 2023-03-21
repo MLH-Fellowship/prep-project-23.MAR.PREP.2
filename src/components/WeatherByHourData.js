@@ -19,7 +19,7 @@ const WeatherByHourData = (results) => {
             })
 
 
-    }, [date, timeOption])
+    }, [cityName, date, timeOption])
 
     useEffect(() => {
         checkParent()
@@ -35,10 +35,11 @@ const WeatherByHourData = (results) => {
         } 
 
         return weatherData.filter(data => data.dt_txt === `${date} ${timeOption}`).map(filteredData => {
+            console.log(filteredData)
             return <div className="Specific-Results">
                 <h2>Date Selected</h2>
                 <div className='weather-box'>
-                    <img src={`https://openweathermap.org/img/wn/${filteredData.weather[0].icon}@2x.png`} alt="weather icon"></img>
+                    <img src={`https://openweathermap.org/img/wn/${filteredData.weather[0].icon}@2x.png`} alt="weather icon"/>
                     <h3>{filteredData.main.feels_like}°C</h3>
                 </div>
                 <h2>{filteredData.weather[0].main}</h2>
@@ -56,15 +57,17 @@ const WeatherByHourData = (results) => {
         })
     }
 
-    const checkParent = (parent, child) => {
-        parent = document.querySelector(".component-window")
+    // This method checks the dom to ensure that child, which is the name of the 
+    // container that contains the weather data from the forecast api call is null
+    // and if count is above 1, which it will increase whenever after the first api call is made.
+    // This method is important because it will allow for the user to know that the data that they request is not
+    // available due to the limitations of the API. 
+
+    const checkParent = (child) => {
         child = document.querySelector(".Specific-Results")
-        console.log(parent, child)
         if (child === null && count > 1) {
-            console.log(count)
             return <h1 className='error-message'>Data not available</h1>
         }
-
     }
 
     return (
