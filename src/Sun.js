@@ -26,7 +26,7 @@ const Sun = ({ latitude, longitude, timezone }) => {
 
         setCurrentTime(adjustedTime);
     };
-    
+
     // get sunrise and sunset times from lat and long coords
     const fetchSunTimes = async (lat, lon) => {
         try {
@@ -70,7 +70,7 @@ const Sun = ({ latitude, longitude, timezone }) => {
             }}
         >
             {isDaytime() && (
-                <img src={sunSVG} className="sun" style={{ left: `${sunPosition()}%`}}></img>
+                <img src={sunSVG} className="sun" style={{ left: `${sunPosition()}%`}} />
             )}
 
             <div className={`sunrise-sunset-info ${isDaytime() ? 'day' : 'night'}`}>
