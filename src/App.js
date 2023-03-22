@@ -23,16 +23,6 @@ function App(props) {
       value={timeOption}
       style={{ border: "solid 1px pink" }}
     >
-      {/* <option value="SelectTime">Select Time</option>
-      <option value="00:00:00">00:00</option>
-      <option value="03:00:00">03:00</option>
-      <option value="06:00:00">06:00</option>
-      <option value="09:00:00">09:00</option>
-      <option value="12:00:00">12:00</option>
-      <option value="15:00:00">15:00</option>
-      <option value="18:00:00">18:00</option>
-      <option value="21:00:00">21:00</option> */}
-
       {arrayOfTimes.map(eachTime => <option value={eachTime}>{eachTime}</option>)}
     </select>
   );
