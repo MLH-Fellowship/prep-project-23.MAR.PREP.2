@@ -19,6 +19,7 @@ function App() {
           } else {
             setIsLoaded(true);
             setResults([...results, result]);
+            setCity("");
           }
         },
         (error) => {
@@ -40,8 +41,11 @@ function App() {
           name="cityinbox"
           value={city}
           onChange={event => setCity(event.target.value)} />
-        <button class="buttons" onClick={() => setButtonClick(!buttonClick)}>Search</button>
-        <button class="buttons" onClick={() => setResults([])}>Clear All</button>
+        <br />
+        <button class="buttons" onClick={() => {
+          setButtonClick(!buttonClick);
+        }}>Search</button>
+        {results.length > 1 && <button class="buttons" onClick={() => setResults(results.slice(1))}>Clear Last</button>}
         <div className="Results">
           {!isLoaded && <h2>Loading...</h2>}
           {console.log(results)}
