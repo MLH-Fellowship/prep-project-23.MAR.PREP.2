@@ -37,6 +37,7 @@ function App(props) {
           } else {
             setIsLoaded(true);
             setResults(result);
+            console.log(results)
           }
         },
         (error) => {

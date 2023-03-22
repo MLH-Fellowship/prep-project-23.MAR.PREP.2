@@ -25,6 +25,8 @@ const WeatherByHourData = (results) => {
         checkChildForErrorMessage()
     }, [])
 
+    // console.log(`Date Selected: ${date}, Time Selected: ${timeOption}, API Results:`, weatherData)
+
 
     const filterDataByDate = (date, timeOption) => {
 
@@ -54,8 +56,6 @@ const WeatherByHourData = (results) => {
                         <td>{filteredData.weather[0].main}</td>
                     </tr>
                 </table>
-                
-                
             </div>
         })
     }
