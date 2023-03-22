@@ -10,10 +10,12 @@ function App() {
   const [results, setResults] = useState(null);
   const [searchedLocation, setSearchedLocation] = useState(null);
 
+  // This function is called when the user submits the form
   const handleCitySubmit = (event) => {
     event.preventDefault();
     setIsLoaded(false);
     setResults(null);
+     // Fetch weather data from OpenWeatherMap API
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_APIKEY}`
     )
@@ -34,9 +36,9 @@ function App() {
         }
       );
   };
-
+ // If there's an error, log it to the console
   if (error) {
-    console.log(error);
+    console.error(error);
   } else {
     return (
       <>
@@ -53,7 +55,6 @@ function App() {
           </form>
           <div className="Results">
             {!isLoaded && <h2>Loading...</h2>}
-            {console.log(results)}
             {isLoaded && results && (
               <>
                 <h3>{results.weather[0].main}</h3>
