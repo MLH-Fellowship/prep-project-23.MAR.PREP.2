@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Sun.css";
-import sunSVG from './sun.svg'
+import sunSVG from './sun.png';
 
 const Sun = ({ latitude, longitude, timezone }) => {
     const [sunrise, setSunrise] = useState(null);
