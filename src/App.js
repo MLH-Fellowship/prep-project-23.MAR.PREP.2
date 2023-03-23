@@ -52,9 +52,7 @@ function App() {
             <i><p>{results.name}, {results.sys.country}</p></i>
           </>}
         </div>
-        <MapComponent searchedLocation={searchedLocation} searchedLocationName={city}
-
-        />
+        <MapComponent searchedLocation={searchedLocation} searchedLocationName={city}/>
       </div>
     </>
   }
