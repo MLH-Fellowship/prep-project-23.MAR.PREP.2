@@ -49,7 +49,7 @@ function App() {
           </>}
         </div>
 
-        <div>
+        <div className="center">
           {!isLoaded && <h2>Loading...</h2>}
           {isLoaded && results && <>
           <AirPollution lat={results.coord.lat} lon={results.coord.lon} />
