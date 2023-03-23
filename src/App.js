@@ -10,6 +10,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState("New York City");
   const [results, setResults] = useState(null);
+  const [user, setUser] = useState(undefined);
 
   useEffect(() => {
     fetch(
@@ -67,9 +68,12 @@ function App() {
         </div>
 
         {results && (
-          <ThemedBackground weatherCondition={results?.weather[0].main} />
+          <ThemedBackground
+            weatherCondition={results.weather[0].main}
+            user={user}
+          />
         )}
-        <ThemeSelector />
+        <ThemeSelector setUser={setUser} />
       </>
     );
   }

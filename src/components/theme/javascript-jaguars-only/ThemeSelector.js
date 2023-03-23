@@ -1,12 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 import Question from "./Question";
 
-export default function ThemeSelector() {
+export default function ThemeSelector({ setUser }) {
   const [themeSelectorActivated, setThemeSelectorActivated] = useState(false);
   const [answeredQuestion, setAnsweredQuestion] = useState(false);
-
-  const animatedBackground = useRef(null);
 
   useEffect(() => {
     let pressCount = 0;
@@ -34,26 +32,13 @@ export default function ThemeSelector() {
     };
   }, []);
 
-  useEffect(() => {
-    if (!themeSelectorActivated) return;
-
-    animatedBackground.current.classList.add("full");
-  }, [themeSelectorActivated]);
-
-  useEffect(() => {
-    if (!answeredQuestion) return;
-
-    animatedBackground.current.classList.remove("full");
-  });
-
   if (!themeSelectorActivated) return null;
 
   return (
     <>
-      <div className="modal-animated-background" ref={animatedBackground}></div>
       <div className="modal-content">
         {answeredQuestion ? (
-          <ChooseTheme />
+          <ChooseTheme setUser={setUser} />
         ) : (
           <Question setAnsweredQuestion={setAnsweredQuestion} />
         )}
@@ -62,6 +47,13 @@ export default function ThemeSelector() {
   );
 }
 
-function ChooseTheme() {
-  return <h1>Choose theme</h1>;
+function ChooseTheme({ setUser }) {
+  return (
+    <div className="members">
+      <button className="member" onClick={() => setUser("Reginald")}>
+        <div className="image"></div>
+        <div className="name">Alfeo Raymond</div>
+      </button>
+    </div>
+  );
 }
