@@ -51,7 +51,6 @@ function App() {
               value={city}
               onChange={(event) => setCity(event.target.value)}
             />
-            <button type="submit">Submit</button>
           </form>
           <div className="Results">
             {!isLoaded && <h2>Loading...</h2>}
