@@ -4,6 +4,24 @@
   padding: 0;
 }
 
+@media screen and (max-width: 270px) {
+  input{
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 300px) {
+  input{
+    width: 175px;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  input{
+    width: 350px;
+  }
+}
+
 .fill-height {
   min-height: 100vh;
   display: grid;
@@ -30,7 +48,7 @@ input {
   padding: 10px;
   border-radius: 4px;
   border: 10px;
-  width: 50%
+  /* width: 25% */
 }
 
 .Page {
