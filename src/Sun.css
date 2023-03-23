@@ -1,0 +1,34 @@
+.sun-container {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+  }
+  
+  .sun {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    transform: translateY(50%);
+  }
+  
+  .sunrise-sunset-info {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: right;
+  }
+
+  .day {
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  .night {
+    color: rgba(255, 255, 255, 0.8);
+    background-color: #333;
+  }
+  
