@@ -62,8 +62,8 @@ function NewsArticles({ city }) {
       pageNumber: '1',
       pageSize: '50',
       autoCorrect: 'true',
-      fromPublishedDate: yesterday,
-      toPublishedDate: today
+      fromPublishedDate: formatDate(yesterday),
+      toPublishedDate: formatDate(today)
     },
     headers: {
       'X-RapidAPI-Key': process.env.REACT_APP_APIKEY,
