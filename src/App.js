@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import logo from "./mlh-prep.png";
+import AirPollution from "./AirPollution";
 import Sun from "./Sun";
 import MapComponent from "./map";
 
@@ -78,6 +79,13 @@ function App() {
             searchedLocation={searchedLocation}
             searchedLocationName={city}
           />
+        </div>
+
+        <div className="center">
+          {!isLoaded && <h2>Loading...</h2>}
+          {isLoaded && results && (
+            <AirPollution lat={results.coord.lat} lon={results.coord.lon} />
+          )}
         </div>
       </>
     );

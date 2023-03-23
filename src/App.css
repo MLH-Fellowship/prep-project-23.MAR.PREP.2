@@ -73,6 +73,13 @@ input {
   width: 70%;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 #map {
  display:flex;
  border-radius: 8px;
