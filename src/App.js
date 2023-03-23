@@ -15,7 +15,7 @@ function App() {
     event.preventDefault();
     setIsLoaded(false);
     setResults(null);
-     // Fetch weather data from OpenWeatherMap API
+    // Fetch weather data from OpenWeatherMap API
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_APIKEY}`
     )
@@ -36,38 +36,40 @@ function App() {
         }
       );
   };
- // If there's an error, log it to the console
+  // If there's an error, log it to the console
   if (error) {
     console.error(error);
   } else {
     return (
       <>
-        <img className="logo" src={logo} alt="MLH Prep Logo"></img>
-        <div>
-          <h2>Enter a city below 👇</h2>
-          <form onSubmit={handleCitySubmit}>
-            <input
-              type="text"
-              value={city}
-              onChange={(event) => setCity(event.target.value)}
-            />
-          </form>
-          <div className="Results">
-            {!isLoaded && <h2>Loading...</h2>}
-            {isLoaded && results && (
-              <>
-                <h3>{results.weather[0].main}</h3>
-                <p>Feels like {results.main.feels_like}°C</p>
-                <i>
-                  <p>
-                    {results.name}, {results.sys.country}
-                  </p>
-                </i>
-              </>
-            )}
+        <div className="fill-height">
+          <img className="logo" src={logo} alt="MLH Prep Logo"></img>
+          <div className="Page">
+            <h2>Enter a city below 👇</h2>
+            <form onSubmit={handleCitySubmit}>
+              <input
+                type="text"
+                value={city}
+                onChange={(event) => setCity(event.target.value)}
+              />
+            </form>
+            <div className="Results">
+              {!isLoaded && <h2>Loading...</h2>}
+              {isLoaded && results && (
+                <>
+                  <h3>{results.weather[0].main}</h3>
+                  <p>Feels like {results.main.feels_like}°C</p>
+                  <i>
+                    <p>
+                      {results.name}, {results.sys.country}
+                    </p>
+                  </i>
+                </>
+              )}
+            </div>
           </div>
+          <MapComponent searchedLocation={searchedLocation} />
         </div>
-        <MapComponent searchedLocation={searchedLocation} />
       </>
     );
   }
