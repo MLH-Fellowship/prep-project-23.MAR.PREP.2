@@ -9,7 +9,7 @@ export default function Question({ setAnsweredQuestion }) {
 
   return (
     <>
-      <h1>What do Jaguars do in their spare time?</h1>
+      <p>What do Jaguars do in their spare time?</p>
       <form action="">
         <input
           type="text"
