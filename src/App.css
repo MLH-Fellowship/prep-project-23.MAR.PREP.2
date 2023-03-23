@@ -73,3 +73,8 @@ input {
   width: 70%;
 }
 
+#map {
+ display:flex;
+ border-radius: 8px;
+ margin: 1em;
+}

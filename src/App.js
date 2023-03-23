@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import logo from "./mlh-prep.png";
+
 import MapComponent from "./map";
 
 function App() {
@@ -68,7 +69,10 @@ function App() {
               )}
             </div>
           </div>
-          <MapComponent searchedLocation={searchedLocation} />
+          <MapComponent
+            searchedLocation={searchedLocation}
+            searchedLocationName={city}
+          />
         </div>
       </>
     );
