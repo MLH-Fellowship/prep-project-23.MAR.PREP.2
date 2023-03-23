@@ -4,6 +4,7 @@ import logo from "./mlh-prep.png";
 import AirPollution from "./AirPollution";
 import Sun from "./Sun";
 import MapComponent from "./map";
+import ThemedBackground from "./components/theme/ThemedBackground";
 
 function App() {
   const [error, setError] = useState(null);
@@ -85,6 +86,10 @@ function App() {
             searchedLocation={searchedLocation}
             searchedLocationName={city}
           />
+
+          {results && (
+            <ThemedBackground weatherCondition={results?.weather[0].main} />
+          )}
         </div>
       </>
     );
