@@ -25,9 +25,6 @@ const WeatherByHourData = (results) => {
         checkChildForErrorMessage()
     }, [])
 
-    // console.log(`Date Selected: ${date}, Time Selected: ${timeOption}, API Results:`, weatherData)
-
-
     const filterDataByDate = (date, timeOption) => {
 
         if (timeOption === "SelectTime" || timeOption === '') {
@@ -37,7 +34,6 @@ const WeatherByHourData = (results) => {
         } 
 
         return weatherData.filter(data => data.dt_txt === `${date} ${timeOption}`).map(filteredData => {
-            console.log(filteredData)
             return <div className="Specific-Results">
                 <div className='weather-icon-container'>
                     <img src={`https://openweathermap.org/img/wn/${filteredData.weather[0].icon}@2x.png`} alt="weather icon" className='weather-icon'/>
