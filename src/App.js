@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import logo from "./mlh-prep.png";
-
+import Sun from "./Sun";
 import MapComponent from "./map";
 
 function App() {
@@ -60,6 +60,11 @@ function App() {
                 <>
                   <h3>{results.weather[0].main}</h3>
                   <p>Feels like {results.main.feels_like}°C</p>
+                  <Sun
+                    latitude={results.coord.lat}
+                    longitude={results.coord.lon}
+                    timezone={results.timezone}
+                  />
                   <i>
                     <p>
                       {results.name}, {results.sys.country}
