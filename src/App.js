@@ -56,7 +56,7 @@ function App() {
               value={city}
               onChange={(event) => setCity(event.target.value)}
             />
-            
+
           </form>
           <div className="Results">
             {!isLoaded && <h2>Loading...</h2>}
