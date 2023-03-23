@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import WeatherByHourData from "./components/WeatherByHourData";
+import ExampleCustomTimeInput from "./components/ExampleCustomTimeInput";
 import './App.css';
 import logo from './mlh-prep.png'
 import DatePicker from "react-datepicker";
@@ -13,19 +14,8 @@ function App(props) {
   const [city, setCity] = useState("New York City")
   const [results, setResults] = useState(null);
   const [date, setDate] = useState(new Date());
-  const arrayOfTimes = ["SelectTime", "00:00:00", "03:00:00", "06:00:00","09:00:00","12:00:00", "15:00:00", "18:00:00","21:00:00"]
+  const arrayOfTimes = ["SelectTime", "00:00:00", "03:00:00", "06:00:00","09:00:00","12:00:00", "15:00:00", "18:00:00","21:00:00"];
   const [timeOption, setTimeOption] = useState(arrayOfTimes[0]);
-
-
-  const ExampleCustomTimeInput = () => (
-    <select
-      onChange={e => setTimeOption(e.target.value)}
-      value={timeOption}
-      style={{ border: "solid 1px pink" }}
-    >
-      {arrayOfTimes.map(eachTime => <option value={eachTime}>{eachTime}</option>)}
-    </select>
-  );
 
   useEffect(() => {
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&appid=" + process.env.REACT_APP_APIKEY)
@@ -48,8 +38,6 @@ function App(props) {
       
   }, [city, timeOption, date])
 
-  
-
   if (error) {
     return <div>Error: {error.message}</div>;
   } else {
@@ -69,7 +57,7 @@ function App(props) {
             selected={date}
             onChange={(date) => setDate(date)}
             showTimeInput
-            customTimeInput={<ExampleCustomTimeInput />}
+            customTimeInput={<ExampleCustomTimeInput timeOption={timeOption} setTimeOption={setTimeOption} arrayOfTimes={arrayOfTimes}/>}
             minDate={new Date()}
             maxDate={addDays(new Date(), 5)}
           />
