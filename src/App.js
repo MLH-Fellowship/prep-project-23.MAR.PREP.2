@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import logo from "./mlh-prep.png";
+import './App.css';
+import logo from './mlh-prep.png'
 import AirPollution from "./AirPollution";
 import Sun from "./Sun";
 import MapComponent from "./map";
 import ThemedBackground from "./components/theme/ThemedBackground";
+import WeatherByHourData from "./components/WeatherByHourData";
+import ExampleCustomTimeInput from "./components/ExampleCustomTimeInput";
+import { addDays } from "date-fns";
+import calendarIcon from './images/55281.png';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-function App() {
+function App(props) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [city, setCity] = useState("New York City");
+  const [city, setCity] = useState("New York City")
   const [results, setResults] = useState(null);
   const [searchedLocation, setSearchedLocation] = useState(null);
+  const [date, setDate] = useState(new Date());
+  const arrayOfTimes = ["SelectTime", "00:00:00", "03:00:00", "06:00:00","09:00:00","12:00:00", "15:00:00", "18:00:00","21:00:00"];
+  const [timeOption, setTimeOption] = useState(arrayOfTimes[0]);
 
   // This function is called when the user submits the form
   const handleCitySubmit = (event) => {
@@ -56,6 +65,21 @@ function App() {
                 onChange={(event) => setCity(event.target.value)}
               />
             </form>
+            <span>
+          <div className="date-picker-div">
+          <DatePicker
+            selected={date}
+            onChange={(date) => setDate(date)}
+            showTimeInput
+            customTimeInput={<ExampleCustomTimeInput timeOption={timeOption} setTimeOption={setTimeOption} arrayOfTimes={arrayOfTimes}/>}
+            minDate={new Date()}
+            maxDate={addDays(new Date(), 5)}
+          />
+        </div>
+        <div className="pic-container">
+            <img src={calendarIcon} alt="calendar icon" className="calendarIcon"></img>
+          </div>
+        </span>
             <div className="Results">
               {!isLoaded && <h2>Loading...</h2>}
               {isLoaded && results && (
@@ -75,6 +99,11 @@ function App() {
                 </>
               )}
             </div>
+                {results === null ? <div>
+                  <h1>Loading...</h1>
+                </div>: 
+                <WeatherByHourData results={results} timeOption={timeOption} date={date}/>}
+            
           </div>
           <div className="center">
             {!isLoaded && <h2>Loading...</h2>}
