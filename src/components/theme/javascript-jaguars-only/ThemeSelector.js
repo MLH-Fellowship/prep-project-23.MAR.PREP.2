@@ -1,82 +1,57 @@
 import { useState, useEffect } from "react";
 
 import Question from "./Question";
+import ChooseTheme from "./ChooseTheme";
 
-import { TEAM } from "../../../lib/constants";
-
-export default function ThemeSelector({ setUser }) {
-  const [themeSelectorActivated, setThemeSelectorActivated] = useState(false);
-  const [answeredQuestion, setAnsweredQuestion] = useState(false);
-  const [isChooseThemeOpen, setIsChooseThemeOpen] = useState(false);
+export default function ThemeSelector({
+  setUser,
+  isThemeSelectorActive,
+  isThemeSelectorMinimized,
+  setIsThemeSelectorMinimized,
+}) {
+  const [isQuestionAnswered, setIsQuestionAnswered] = useState(false);
 
   useEffect(() => {
-    let pressCount = 0;
-
-    const handleKeyDown = (event) => {
-      if (event.key !== "J") return;
-
-      if (pressCount === 0) {
-        pressCount += 1;
-
-        let timeout = setTimeout(() => {
-          pressCount = 0;
-          clearTimeout(timeout);
-        }, 1000);
-      } else {
-        pressCount = 0;
-        setThemeSelectorActivated(true);
+    function handleClick(e) {
+      if (e.target.className === "modal-wrapper") {
+        setIsThemeSelectorMinimized(true);
       }
-    };
+    }
 
-    window.addEventListener("keydown", handleKeyDown);
+    function handleKeyDown(e) {
+      e.stopPropagation();
+
+      if (e.key === "Escape") {
+        setIsThemeSelectorMinimized(true);
+      }
+    }
+
+    document.addEventListener("click", handleClick);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("click", handleClick);
+      document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [setIsThemeSelectorMinimized]);
 
-  useEffect(() => {
-    if (answeredQuestion) {
-      setIsChooseThemeOpen(true);
-    }
-  }, [answeredQuestion]);
-
-  if (!themeSelectorActivated) return null;
+  if (!isThemeSelectorActive) return null;
 
   return (
-    <div className="modal-wrapper">
-      <div className="modal-content">
-        {answeredQuestion ? (
-          <ChooseTheme
-            setUser={setUser}
-            isChooseThemeOpen={isChooseThemeOpen}
-            setIsChooseThemeOpen={setIsChooseThemeOpen}
-          />
-        ) : (
-          <Question setAnsweredQuestion={setAnsweredQuestion} />
-        )}
-      </div>
-    </div>
-  );
-}
-
-function ChooseTheme({ setUser, isChooseThemeOpen, setIsChooseThemeOpen }) {
-  if (!isChooseThemeOpen) return null;
-
-  return (
-    <div className="members">
-      {TEAM.map(({ name, profilePic }) => (
-        <div
-          className="member"
-          onClick={() => {
-            setUser(name);
-            setIsChooseThemeOpen(false);
-          }}
-        >
-          <img src={profilePic} alt="" />
-          <div className="name">{name}</div>
+    <>
+      {isThemeSelectorMinimized ? (
+        <div className="floating-button"></div>
+      ) : (
+        <div className="modal-wrapper">
+          <div className="modal-content">
+            {isQuestionAnswered ? (
+              <ChooseTheme setUser={setUser} />
+            ) : (
+              <Question setIsQuestionAnswered={setIsQuestionAnswered} />
+            )}
+          </div>
         </div>
-      ))}
-    </div>
+      )}
+    </>
   );
 }

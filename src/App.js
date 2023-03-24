@@ -10,7 +10,12 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState("New York City");
   const [results, setResults] = useState(null);
-  const [user, setUser] = useState(undefined);
+
+  // State for custom theme
+  const [user, setUser] = useState(null);
+  const [isThemeSelectorActive, setIsThemeSelectorActive] = useState(false);
+  const [isThemeSelectorMinimized, setIsThemeSelectorMinimized] =
+    useState(true);
 
   useEffect(() => {
     fetch(
@@ -36,6 +41,34 @@ function App() {
         }
       );
   }, [city]);
+
+  // Listen for secret theme selector activation
+  useEffect(() => {
+    let pressCount = 0;
+
+    const handleKeyDown = (event) => {
+      if (event.key !== "J") return;
+
+      if (pressCount === 0) {
+        pressCount += 1;
+
+        let timeout = setTimeout(() => {
+          pressCount = 0;
+          clearTimeout(timeout);
+        }, 1000);
+      } else {
+        pressCount = 0;
+        setIsThemeSelectorActive(true);
+        setIsThemeSelectorMinimized(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -67,13 +100,13 @@ function App() {
           </div>
         </div>
 
-        {results && (
-          <ThemedBackground
-            weatherCondition={results.weather[0].main}
-            user={user}
-          />
-        )}
-        <ThemeSelector setUser={setUser} />
+        <ThemedBackground user={user} results={results} />
+        <ThemeSelector
+          setUser={setUser}
+          isThemeSelectorActive={isThemeSelectorActive}
+          isThemeSelectorMinimized={isThemeSelectorMinimized}
+          setIsThemeSelectorMinimized={setIsThemeSelectorMinimized}
+        />
       </>
     );
   }

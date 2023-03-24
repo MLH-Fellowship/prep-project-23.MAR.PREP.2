@@ -96,6 +96,16 @@ input {
   padding: 10px;
 }
 
+.member {
+  cursor: pointer;
+  padding: 8px;
+}
+
+.member:hover {
+  background: #133667;
+  border-radius: 5px;
+}
+
 .member img {
   --size: 10vmin;
   width: var(--size);
