@@ -71,29 +71,19 @@ input {
   flex-direction: column;
   justify-content: center;
 
-  height: 50vh;
+  padding: 0;
+  padding-top: 48px;
 
-  padding: 24px;
-}
-
-.modal-content p {
-  margin-top: 0;
-}
-
-.modal-content input {
-  box-sizing: border-box;
-  width: 100%;
-
-  padding: 8px;
-  font-size: 16px;
+  position: relative;
 }
 
 .members {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 10px;
+  grid-gap: 5px;
 
-  padding: 10px;
+  padding: 2vmin;
+  padding-top: 0;
 }
 
 .member {
@@ -106,12 +96,47 @@ input {
   border-radius: 5px;
 }
 
-.member img {
-  --size: 10vmin;
+.member img,
+.hovered-theme img {
+  --size: max(60px, 6vmin);
   width: var(--size);
   height: var(--size);
   object-fit: cover;
 
   border-radius: 50%;
-  border: 5px solid white;
+  border: 2px solid white;
+}
+
+.floating-action-button {
+  --button-size: max(50px, 4vmin);
+  width: var(--button-size);
+  height: var(--button-size);
+
+  border-radius: 50%;
+  border: none;
+
+  cursor: pointer;
+
+  position: fixed;
+  bottom: 2vmin;
+  right: 2vmin;
+}
+
+.floating-action-button svg {
+  width: 80%;
+  vertical-align: middle;
+}
+
+.hovered-theme img {
+  --size: max(100px, 10vmin);
+
+  position: absolute;
+  top: 0;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+
+.hovered-theme p {
+  margin-top: 8px;
 }

@@ -1,4 +1,4 @@
-export default function ThemedBackground({ user = "Basic", results }) {
+export default function ThemedBackground({ fellow = "Basic", results }) {
   if (!results) return null;
 
   const weatherCondition = results.weather[0].main;
@@ -6,7 +6,7 @@ export default function ThemedBackground({ user = "Basic", results }) {
   return (
     <div className="themed-background">
       <img
-        src={`./backgrounds/${user}/${weatherCondition}.jpg`}
+        src={`./backgrounds/${fellow}/${weatherCondition}.jpg`}
         alt=""
         onError={(e) => {
           // fallback for invalid user, won't be needing it once I generate images for everybody

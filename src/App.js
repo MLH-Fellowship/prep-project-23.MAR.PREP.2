@@ -12,10 +12,7 @@ function App() {
   const [results, setResults] = useState(null);
 
   // State for custom theme
-  const [user, setUser] = useState(null);
-  const [isThemeSelectorActive, setIsThemeSelectorActive] = useState(false);
-  const [isThemeSelectorMinimized, setIsThemeSelectorMinimized] =
-    useState(true);
+  const [fellow, setFellow] = useState(null);
 
   useEffect(() => {
     fetch(
@@ -41,34 +38,6 @@ function App() {
         }
       );
   }, [city]);
-
-  // Listen for secret theme selector activation
-  useEffect(() => {
-    let pressCount = 0;
-
-    const handleKeyDown = (event) => {
-      if (event.key !== "J") return;
-
-      if (pressCount === 0) {
-        pressCount += 1;
-
-        let timeout = setTimeout(() => {
-          pressCount = 0;
-          clearTimeout(timeout);
-        }, 1000);
-      } else {
-        pressCount = 0;
-        setIsThemeSelectorActive(true);
-        setIsThemeSelectorMinimized(false);
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -100,13 +69,8 @@ function App() {
           </div>
         </div>
 
-        <ThemedBackground user={user} results={results} />
-        <ThemeSelector
-          setUser={setUser}
-          isThemeSelectorActive={isThemeSelectorActive}
-          isThemeSelectorMinimized={isThemeSelectorMinimized}
-          setIsThemeSelectorMinimized={setIsThemeSelectorMinimized}
-        />
+        <ThemedBackground fellow={fellow} results={results} />
+        <ThemeSelector setFellow={setFellow} />
       </>
     );
   }
