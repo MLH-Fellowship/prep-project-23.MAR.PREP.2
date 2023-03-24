@@ -1,14 +1,16 @@
-import { useState } from "react";
-import './App.css';
-import WeatherByHourData from "./components/WeatherByHourData";
-import ExampleCustomTimeInput from "./components/ExampleCustomTimeInput";
+import React, { useEffect, useState } from "react";
 import './App.css';
 import logo from './mlh-prep.png'
+import AirPollution from "./AirPollution";
+import Sun from "./Sun";
+import MapComponent from "./map";
+import ThemedBackground from "./components/theme/ThemedBackground";
+import WeatherByHourData from "./components/WeatherByHourData";
+import ExampleCustomTimeInput from "./components/ExampleCustomTimeInput";
+import { addDays } from "date-fns";
+import calendarIcon from './images/55281.png';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { addDays } from "date-fns";
-import calendarIcon from './images/55281.png'
-import MapComponent from "./map";
 
 function App(props) {
   const [error, setError] = useState(null);
@@ -25,7 +27,7 @@ function App(props) {
     event.preventDefault();
     setIsLoaded(false);
     setResults(null);
-     // Fetch weather data from OpenWeatherMap API
+    // Fetch weather data from OpenWeatherMap API
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_APIKEY}`
     )
@@ -46,24 +48,24 @@ function App(props) {
         }
       );
   };
- // If there's an error, log it to the console
+  // If there's an error, log it to the console
   if (error) {
     console.error(error);
   } else {
     return (
       <>
-        <img className="logo" src={logo} alt="MLH Prep Logo"></img>
-        <div>
-          <h2>Enter a city below 👇</h2>
-          <form onSubmit={handleCitySubmit}>
-            <input
-              type="text"
-              value={city}
-              onChange={(event) => setCity(event.target.value)}
-            />
-            <button type="submit">Submit</button>
-          </form>
-          <span>
+        <div className="fill-height">
+          <img className="logo" src={logo} alt="MLH Prep Logo"></img>
+          <div className="Page">
+            <h2>Enter a city below 👇</h2>
+            <form onSubmit={handleCitySubmit}>
+              <input
+                type="text"
+                value={city}
+                onChange={(event) => setCity(event.target.value)}
+              />
+            </form>
+            <span>
           <div className="date-picker-div">
           <DatePicker
             selected={date}
@@ -78,27 +80,46 @@ function App(props) {
             <img src={calendarIcon} alt="calendar icon" className="calendarIcon"></img>
           </div>
         </span>
-          <div className="Results">
+            <div className="Results">
+              {!isLoaded && <h2>Loading...</h2>}
+              {isLoaded && results && (
+                <>
+                  <h3>{results.weather[0].main}</h3>
+                  <p>Feels like {results.main.feels_like}°C</p>
+                  <Sun
+                    latitude={results.coord.lat}
+                    longitude={results.coord.lon}
+                    timezone={results.timezone}
+                  />
+                  <i>
+                    <p>
+                      {results.name}, {results.sys.country}
+                    </p>
+                  </i>
+                </>
+              )}
+            </div>
+                {results === null ? <div>
+                  <h1>Loading...</h1>
+                </div>: 
+                <WeatherByHourData results={results} timeOption={timeOption} date={date}/>}
+            
+          </div>
+          <div className="center">
             {!isLoaded && <h2>Loading...</h2>}
             {isLoaded && results && (
-              <>
-                <h3>{results.weather[0].main}</h3>
-                <p>Feels like {results.main.feels_like}°C</p>
-                <i>
-                  <p>
-                    {results.name}, {results.sys.country}
-                  </p>
-                </i>
-              </>
+              <AirPollution lat={results.coord.lat} lon={results.coord.lon} />
             )}
           </div>
-          {results === null ? <div>
-        <h1>Loading...</h1>
-      </div> : <div>
-        <WeatherByHourData results={results} date={date} timeOption={timeOption} />
-      </div>}
+          <MapComponent
+            searchedLocation={searchedLocation}
+            searchedLocationName={city}
+          />
+
+          {results && (
+            <ThemedBackground weatherCondition={results?.weather[0].main} />
+          )}
         </div>
-        <MapComponent searchedLocation={searchedLocation} />
       </>
     );
   }
