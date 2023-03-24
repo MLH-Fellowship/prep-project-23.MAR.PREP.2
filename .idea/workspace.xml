@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="71243744-2649-443e-8a62-6c381f63b51b" name="Changes" comment="works">
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2N9w4lJFJGbQp7PJanFseyUXwGB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "javascript.nodejs.core.library.configured.version": "16.0.0",
+    "javascript.nodejs.core.library.typings.version": "16.0.0",
+    "last_opened_file_path": "/home/carghai/WebstormProjects/prep-project-23.MAR.PREP.2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "ts.external.directory.path": "/home/carghai/.local/share/JetBrains/Toolbox/apps/WebStorm/ch-0/223.8836.50/plugins/javascript-impl/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="npm.start">
+    <configuration name="run" type="NodeJSConfigurationType" node-parameters="start" working-dir="$PROJECT_DIR$">
+      <EXTENSION ID="com.jetbrains.nodejs.run.NodeStartBrowserRunConfigurationExtension">
+        <browser start="true" />
+      </EXTENSION>
+      <method v="2" />
+    </configuration>
+    <configuration name="start" type="js.build_tools.npm" activateToolWindowBeforeRun="false" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="start" />
+      <node-interpreter value="$USER_HOME$/.nvm/versions/node/v16.0.0/bin/node" />
+      <package-manager value="npm" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Node.js.run" />
+      <item itemvalue="npm.start" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="71243744-2649-443e-8a62-6c381f63b51b" name="Changes" comment="" />
+      <created>1679089420132</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1679089420132</updated>
+      <workItem from="1679089421709" duration="204000" />
+      <workItem from="1679089642570" duration="387000" />
+      <workItem from="1679090063733" duration="343000" />
+      <workItem from="1679090422708" duration="269000" />
+      <workItem from="1679090976509" duration="405000" />
+      <workItem from="1679091402828" duration="364000" />
+      <workItem from="1679093135012" duration="3116000" />
+      <workItem from="1679097678344" duration="11065000" />
+      <workItem from="1679623239869" duration="3998000" />
+    </task>
+    <task id="LOCAL-00001" summary="works and functions">
+      <created>1679111531850</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1679111531850</updated>
+    </task>
+    <task id="LOCAL-00002" summary="works and functions">
+      <created>1679624384425</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1679624384425</updated>
+    </task>
+    <task id="LOCAL-00003" summary="works and functions">
+      <created>1679624591680</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1679624591680</updated>
+    </task>
+    <task id="LOCAL-00004" summary="works">
+      <created>1679627131101</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1679627131101</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="works and functions" />
+    <MESSAGE value="works" />
+    <option name="LAST_COMMIT_MESSAGE" value="works" />
+  </component>
+</project>
