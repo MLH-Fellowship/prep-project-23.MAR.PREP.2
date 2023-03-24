@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import NewsArticles from './componets/NewsArticles';
 import "./App.css";
 import logo from "./mlh-prep.png";
 import Box from './components/SuggestedThings/Box';
@@ -181,7 +182,9 @@ function App(props) {
             <ThemedBackground weatherCondition={results?.weather[0].main} />
           )}
         </div>
-      </>
+      <NewsArticles city={city} />
+
+    </>
     );
   }
 }
