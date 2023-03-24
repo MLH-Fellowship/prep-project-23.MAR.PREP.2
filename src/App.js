@@ -148,7 +148,6 @@ function App(props) {
             <ThemedBackground weatherCondition={results?.weather[0].main} />
           )}
         </div>
-      <MapComponent searchedLocation={searchedLocation} />
       <NewsArticles city={city} />
 
     </>
