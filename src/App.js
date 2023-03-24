@@ -177,17 +177,8 @@ function App(props) {
           </div>
           <div className="center">
             {!isLoaded && <h2>Loading...</h2>}
-            {console.log(results)}
             {isLoaded && results && (
-              <>
-                <h3>{results.weather[0].main}</h3>
-                <p>Feels like {results.main.feels_like}°C</p>
-                <i>
-                  <p>
-                    {results.name}, {results.sys.country}
-                  </p>
-                </i>
-              </>
+              <AirPollution lat={results.coord.lat} lon={results.coord.lon} />
             )}
           </div>
           <h2 className="suggested-things-heading">
