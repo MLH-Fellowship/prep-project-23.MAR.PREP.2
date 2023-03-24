@@ -15,6 +15,7 @@ function App() {
                 //This code uses the Haversine formula to calculate the distance between the user's location and each city in the citiesData array. The distances are stored in an array of objects with each object containing the name of the city and the distance from the user's location.
                 // The Promise.all method is used to wait for all the distance calculations to complete before finding the closest city. The reduce method is used to find the city with the smallest distance, which is then set as the closest city.
                 let City = require('country-state-city').City;
+                let citiesData = City.getAllCities();
                 const {latitude, longitude} = position.coords;
                 const R = 6371e3; // Earth radius in meters
                 const rad = (x) => (x * Math.PI) / 180;
