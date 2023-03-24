@@ -12,28 +12,24 @@ function App() {
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(async (position) => {
+                //This code uses the Haversine formula to calculate the distance between the user's location and each city in the citiesData array. The distances are stored in an array of objects with each object containing the name of the city and the distance from the user's location.
+                // The Promise.all method is used to wait for all the distance calculations to complete before finding the closest city. The reduce method is used to find the city with the smallest distance, which is then set as the closest city.
+                let City = require('country-state-city').City;
                 const {latitude, longitude} = position.coords;
-                const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=YOUR_API_KEY`);
-                const data = await response.json();
-                const result = data.results[0];
-                if (result && result.address_components) {
-                    const cityName = result.address_components.find((component) => component.types[0] === 'locality').long_name;
-                    setCity(cityName);
-                } else {
-                    let City = require('country-state-city').City;
-                    let json = City.getAllCities()
-                    let closest_city = "";
-                    let closest_lat = 100000000000000
-                    let closest_long = 100000000000000
-                    for (let x = 0; x < json.length; x++) {
-                        if (Math.abs(latitude - json[x].latitude < closest_lat && Math.abs(longitude - json[x].longitude)) < closest_long) {
-                            closest_lat = json[x].latitude;
-                            closest_city = json[x].name;
-                            closest_long = json[x].longitude;
-                        }
-                    }
-                    setCity(closest_city);
-                }
+                const R = 6371e3; // Earth radius in meters
+                const rad = (x) => (x * Math.PI) / 180;
+                const distances = citiesData.map((city) => {
+                    const dLat = rad(city.latitude - latitude);
+                    const dLon = rad(city.longitude - longitude);
+                    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(latitude)) * Math.cos(rad(city.latitude)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+                    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                    const distance = R * c;
+                    return {city: city.name, distance};
+                });
+                Promise.all(distances).then((results) => {
+                    const closestCity = results.reduce((prev, curr) => prev.distance < curr.distance ? prev : curr).city;
+                    setCity(closestCity);
+                });
             }, (error) => console.log(error));
         }
     }, [])
