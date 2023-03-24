@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import NewsArticles from './componets/NewsArticles';
+import NewsArticles from "./componets/NewsArticles";
 import "./App.css";
 import logo from "./mlh-prep.png";
-import Box from './components/SuggestedThings/Box';
+import Box from "./components/SuggestedThings/Box";
 import AirPollution from "./AirPollution";
 import Sun from "./Sun";
 import MapComponent from "./map";
 import ThemedBackground from "./components/theme/ThemedBackground";
+import ThemeSelector from "./components/theme/javascript-jaguars-only/ThemeSelector";
 import WeatherByHourData from "./components/WeatherByHourData";
 import ExampleCustomTimeInput from "./components/ExampleCustomTimeInput";
 import { addDays } from "date-fns";
@@ -18,6 +19,10 @@ function App(props) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [city, setCity] = useState("New York City");
   const [results, setResults] = useState(null);
+
+  // State for custom theme
+  const [fellow, setFellow] = useState(null);
+
   const [searchedLocation, setSearchedLocation] = useState(null);
   const [date, setDate] = useState(new Date());
   const arrayOfTimes = [
@@ -34,29 +39,39 @@ function App(props) {
   const [timeOption, setTimeOption] = useState(arrayOfTimes[0]);
   useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        //This code uses the Haversine formula to calculate the distance between the user's location and each city in the citiesData array. The distances are stored in an array of objects with each object containing the name of the city and the distance from the user's location.
-        // The Promise.all method is used to wait for all the distance calculations to complete before finding the closest city. The reduce method is used to find the city with the smallest distance, which is then set as the closest city.
-        let City = require('country-state-city').City;
-        let citiesData = City.getAllCities();
-        const {latitude, longitude} = position.coords;
-        const R = 6371e3; // Earth radius in meters
-        const rad = (x) => (x * Math.PI) / 180;
-        const distances = citiesData.map((city) => {
-          const dLat = rad(city.latitude - latitude);
-          const dLon = rad(city.longitude - longitude);
-          const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(latitude)) * Math.cos(rad(city.latitude)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-          const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-          const distance = R * c;
-          return {city: city.name, distance};
-        });
-        Promise.all(distances).then((results) => {
-          const closestCity = results.reduce((prev, curr) => prev.distance < curr.distance ? prev : curr).city;
-          setCity(closestCity);
-        });
-      }, (error) => console.log(error));
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          //This code uses the Haversine formula to calculate the distance between the user's location and each city in the citiesData array. The distances are stored in an array of objects with each object containing the name of the city and the distance from the user's location.
+          // The Promise.all method is used to wait for all the distance calculations to complete before finding the closest city. The reduce method is used to find the city with the smallest distance, which is then set as the closest city.
+          let City = require("country-state-city").City;
+          let citiesData = City.getAllCities();
+          const { latitude, longitude } = position.coords;
+          const R = 6371e3; // Earth radius in meters
+          const rad = (x) => (x * Math.PI) / 180;
+          const distances = citiesData.map((city) => {
+            const dLat = rad(city.latitude - latitude);
+            const dLon = rad(city.longitude - longitude);
+            const a =
+              Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(rad(latitude)) *
+                Math.cos(rad(city.latitude)) *
+                Math.sin(dLon / 2) *
+                Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            const distance = R * c;
+            return { city: city.name, distance };
+          });
+          Promise.all(distances).then((results) => {
+            const closestCity = results.reduce((prev, curr) =>
+              prev.distance < curr.distance ? prev : curr
+            ).city;
+            setCity(closestCity);
+          });
+        },
+        (error) => console.log(error)
+      );
     }
-  }, [])
+  }, []);
   // This function is called when the user submits the form
   const handleCitySubmit = (event) => {
     event.preventDefault();
@@ -64,7 +79,11 @@ function App(props) {
     setResults(null);
     // Fetch weather data from OpenWeatherMap API
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${process.env.REACT_APP_APIKEY}`
+      "https://api.openweathermap.org/data/2.5/weather?q=" +
+        city +
+        "&units=metric" +
+        "&appid=" +
+        process.env.REACT_APP_APIKEY
     )
       .then((res) => res.json())
       .then(
@@ -74,7 +93,6 @@ function App(props) {
           } else {
             setIsLoaded(true);
             setResults(result);
-            setSearchedLocation([result.coord.lat, result.coord.lon]); // Set the coordinates of the searched location
           }
         },
         (error) => {
@@ -83,9 +101,9 @@ function App(props) {
         }
       );
   };
-  // If there's an error, log it to the console
+
   if (error) {
-    console.error(error);
+    return <div>Error: {error.message}</div>;
   } else {
     return (
       <>
@@ -163,28 +181,31 @@ function App(props) {
               <AirPollution lat={results.coord.lat} lon={results.coord.lon} />
             )}
           </div>
-          <h2 className="suggested-things-heading">Things you need to carry 🎒</h2>
+          <h2 className="suggested-things-heading">
+            Things you need to carry 🎒
+          </h2>
           {/* Displays the 'Box' component if results(API response) is not null.
           Here, the API response is passed as props to the Box component*/}
-          {results == null ? 
-          <div>
-            <h2>Loading...</h2>
-          </div> : 
-          <div>
-            <Box weather={results} />
-          </div>}
+          {results == null ? (
+            <div>
+              <h2>Loading...</h2>
+            </div>
+          ) : (
+            <div>
+              <Box weather={results} />
+            </div>
+          )}
           <MapComponent
             searchedLocation={searchedLocation}
             searchedLocationName={city}
           />
 
-          {results && (
-            <ThemedBackground weatherCondition={results?.weather[0].main} />
-          )}
+          <ThemedBackground fellow={fellow} results={results} />
+          <ThemeSelector setFellow={setFellow} />
         </div>
-      <NewsArticles city={city} />
 
-    </>
+        <NewsArticles city={city} />
+      </>
     );
   }
 }
