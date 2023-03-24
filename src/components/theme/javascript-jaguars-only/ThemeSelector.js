@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { TEAM } from "../../../lib/constants";
 
 export default function ThemeSelector({ setFellow }) {
-  const [isThemeSelectorOpen, setIsThemeSelectorOpen] = useState(true);
+  const [isThemeSelectorOpen, setIsThemeSelectorOpen] = useState(false);
   const [hoveredThemeProfile, setHoveredThemeProfile] = useState(TEAM[0]);
 
   useEffect(() => {
