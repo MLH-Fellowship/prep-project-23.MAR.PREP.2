@@ -66,7 +66,7 @@ function NewsArticles({ city }) {
       toPublishedDate: formatDate(today)
     },
     headers: {
-      'X-RapidAPI-Key': process.env.REACT_APP_APIKEY,
+      'X-RapidAPI-Key': process.env.REACT_APP_WEATHERNEWSKEY,
       'X-RapidAPI-Host': 'contextualwebsearch-websearch-v1.p.rapidapi.com'
     }
   };
