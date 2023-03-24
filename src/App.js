@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import logo from "./mlh-prep.png";
+import Box from './components/SuggestedThings/Box';
 import AirPollution from "./AirPollution";
 import Sun from "./Sun";
 import MapComponent from "./map";
@@ -138,6 +139,16 @@ function App(props) {
               <AirPollution lat={results.coord.lat} lon={results.coord.lon} />
             )}
           </div>
+          <h2 className="suggested-things-heading">Things you need to carry 🎒</h2>
+          {/* Displays the 'Box' component if results(API response) is not null.
+          Here, the API response is passed as props to the Box component*/}
+          {results == null ? 
+          <div>
+            <h2>Loading...</h2>
+          </div> : 
+          <div>
+            <Box weather={results} />
+          </div>}
           <MapComponent
             searchedLocation={searchedLocation}
             searchedLocationName={city}
