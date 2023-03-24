@@ -11,7 +11,6 @@ import { addDays } from "date-fns";
 import calendarIcon from "./images/55281.png";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
 function App(props) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -31,7 +30,31 @@ function App(props) {
     "21:00:00",
   ];
   const [timeOption, setTimeOption] = useState(arrayOfTimes[0]);
-
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        //This code uses the Haversine formula to calculate the distance between the user's location and each city in the citiesData array. The distances are stored in an array of objects with each object containing the name of the city and the distance from the user's location.
+        // The Promise.all method is used to wait for all the distance calculations to complete before finding the closest city. The reduce method is used to find the city with the smallest distance, which is then set as the closest city.
+        let City = require('country-state-city').City;
+        let citiesData = City.getAllCities();
+        const {latitude, longitude} = position.coords;
+        const R = 6371e3; // Earth radius in meters
+        const rad = (x) => (x * Math.PI) / 180;
+        const distances = citiesData.map((city) => {
+          const dLat = rad(city.latitude - latitude);
+          const dLon = rad(city.longitude - longitude);
+          const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(latitude)) * Math.cos(rad(city.latitude)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+          const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+          const distance = R * c;
+          return {city: city.name, distance};
+        });
+        Promise.all(distances).then((results) => {
+          const closestCity = results.reduce((prev, curr) => prev.distance < curr.distance ? prev : curr).city;
+          setCity(closestCity);
+        });
+      }, (error) => console.log(error));
+    }
+  }, [])
   // This function is called when the user submits the form
   const handleCitySubmit = (event) => {
     event.preventDefault();
