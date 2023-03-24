@@ -1,0 +1,21 @@
+.container {
+    width: 30%;
+    margin-top: 20px;
+    padding: 5px;
+    box-shadow: 0 3px 8px rgba(170,230,239,0.8), 0 3px 8px rgba(170,230,239,0.8);
+    border-radius: 8px;
+}
+
+.h2_pollution {
+    flex: 1;
+    margin: 10px;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #cee8f0;
+    font-size: 1.8em;
+}
+
+.airpol_img {
+    flex: 1;
+    width: 15%;
+}
+

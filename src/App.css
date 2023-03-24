@@ -12,6 +12,11 @@ body {
   margin-top: 20px;
 }
 
+.calendarIcon {
+  width: 100%;
+  height: 100%;
+}
+
 input {
   padding: 10px;
   border-radius: 4px;
@@ -26,7 +31,179 @@ input {
   margin-top: 20px;
   border-radius: 8px;
   color: black;
+   /* padding: 10px; */
+   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+   padding: 4%;
+   width: 70%;
+}
+
+
+.themed-background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: hsla(0 0% 0% / 25%);
+}
+
+.themed-background img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#map {
+ display:flex;
+ border-radius: 8px;
+ margin: 1em;
+}
+
+.Specific-Results {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: white;
+  margin-left: 150px;
+  margin-right: 150px;
+  margin-top: 20px;
+  border-radius: 8px;
+  color: black;
   padding: 10px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.error-message{
+  background-color: white;
+  margin-left: 150px;
+  margin-right: 150px;
+  margin-top: 20px;
+  border-radius: 8px;
+  color: black;
+  padding: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.weather-box{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom-weather-box {
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.pic-container {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  left: 54.3vw;
+  bottom: 27px;
+}
+
+.date-picker-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 84%;
+  margin: 0 auto;
+}
+
+.react-datepicker-wrapper{
+  width: fit-content !important;
+}
+
+.react-datepicker__input-container input{
+  cursor: pointer;
+  display: hidden;
+}
+
+.react-datepicker__input-container:active {
+  display: block;
+}
+
+th {
+  font-size: 2vw;
+  width: 15vw;
+  background: #333; 
+  color: white; 
+  font-weight: bold; 
+  padding: 6px; 
+  border: 1px solid #ccc; 
+  text-align: center;
+}
+
+td {
+  font-size: 1.9vw;
+  width: 15vw;
+  padding: 6px; 
+  border: 1px solid #ccc; 
+  text-align: center;
+}
+
+.weather-icon-container{
+  width: 15vw;
+  height: 200px;
+  border: 2px solid lightskyblue;
+  background-color: lightslategray;
+}
+
+.weather-icon {
+  width: 100%;
+  height: 100%;
+}
+
+@media only screen and (max-width: 658px) {
+  .Specific-Results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .weather-icon-container{
+    width: 100%;
+  }
+  tr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  th {
+    width: 100%;
+  }
+
+  td {
+    width: 100%;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  
 }
 
